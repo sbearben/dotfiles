@@ -1,0 +1,21 @@
+#!/bin/bash
+
+run_list() {
+
+cat <<EOT
+
+OS X dotfiles - Armon Khosravi
+
+Additional software to install:
+
+  Android Studio
+  Flipper
+  Flux
+  Google Chrome
+  Slack
+  Spotify
+  VSCode
+
+EOT
+
+}
