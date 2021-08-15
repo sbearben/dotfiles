@@ -2,16 +2,17 @@
 
 # Install mac applications
 
-install() {
+_install() {
   brew install --cask $1
 }
 
-install google-chrome
-install spotify
-install flipper
-install visual-studio-code
-install android-studio
-install slack
-install flux
+install_applications() {
+    _install google-chrome
+    _install spotify
+    _install flipper
+    _install visual-studio-code
+    _install android-studio
+    _install slack
+    _install flux
+}
 
-unset install;
