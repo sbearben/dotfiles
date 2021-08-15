@@ -23,7 +23,7 @@ source ./lib/list
 source ./lib/utils
 source ./lib/brew
 source ./macos/install-applications.sh
-source ./vscode/install-extensions.sh
+source ./vscode/setup.sh
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -88,8 +88,9 @@ if [[ $install_apps ]]; then
     e_header "Installing OS X desktop apps"
     # Install OS X apps via cask
     install_applications
+    # Post-installation vscode setup
     install_vscode_extensions
-    ln -fs "${DOTFILES_DIRECTORY}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+    symlink_vscode_settings "${DOTFILES_DIRECTORY}"
 else
     printf "Skipped installing applications.\n"
 fi
@@ -145,7 +146,7 @@ seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
     mirrorfiles
-    source ${HOME}/.bash_profile
+    source "${HOME}/.bash_profile"
 else
     printf "Aborting...\n"
     exit 1
