@@ -21,6 +21,7 @@ run_brew() {
             'tldr'
             'dockutil'
             'bash-completion@2'
+            'bundle'
         )
 
         # Syntax below expands an array to a list of its indices
