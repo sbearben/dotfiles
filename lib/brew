@@ -22,6 +22,7 @@ run_brew() {
             'dockutil'
             'bash-completion@2'
             'bundle'
+            'scrcpy'
         )
 
         # Syntax below expands an array to a list of its indices
