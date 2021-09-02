@@ -18,11 +18,12 @@ run_brew() {
         local -a missing_formulae
         local -a desired_formulae=(
             'apktool'
-            'tldr'
-            'dockutil'
             'bash-completion@2'
-            'bundle'
+            # 'bundle'
+            'dockutil'
+            'node'
             'scrcpy'
+            'tldr'
         )
 
         # Syntax below expands an array to a list of its indices

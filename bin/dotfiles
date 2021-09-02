@@ -85,8 +85,8 @@ fi
 
 # First insall applications if desired
 if [[ $install_apps ]]; then
-    e_header "Installing OS X desktop apps"
-    # Install OS X apps via cask
+    e_header "Installing macOS desktop apps"
+    # Install macOS apps via cask
     install_applications
     # Post-installation vscode setup
     install_vscode_extensions
@@ -152,13 +152,13 @@ else
     exit 1
 fi
 
-# Ask before potentially overwritting OS X defaults
-seek_confirmation "Warning: This step may modify your OS X system defaults."
+# Ask before potentially overwritting macOS defaults
+seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
     bash ./bin/osxdefaults
-    e_success "OS X settings updated! You may need to restart."
+    e_success "macOS settings updated! You may need to restart."
 else
-    printf "Skipped OS X settings update.\n"
+    printf "Skipped macOS settings update.\n"
 fi
 
