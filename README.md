@@ -64,3 +64,12 @@ also be applied independently by running the following command:
 ```bash
 $ ./macos/macosdefaults
 ```
+
+### Configure macOS dock
+
+Configure the macOS dock with installed and system applications by running the
+following command:
+
+```bash
+$ ./macos/dock.sh
+```
