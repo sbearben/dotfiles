@@ -1,0 +1,38 @@
+[user]
+	name = Armon Khosravi
+	# email = 
+
+[github]
+	user = sbearben
+
+# [credential]
+	# helper = osxkeychain
+
+[core]
+	commitGraph = true
+	pager = delta
+
+[diff]
+	algorithm = patience
+
+[gc]
+	writeCommitGraph = true
+
+[protocol]
+	version = 2
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	syntax-theme = Monokai Extended Light
+	features = line-numbers
+	# side-by-side = true
+
+[delta "line-numbers"]
+	line-numbers = true
+	line-numbers-left-format = "{nm:>4}┊"
+	line-numbers-right-format = "{np:>4}│"
+	line-numbers-left-style = blue
+	line-numbers-right-style = blue
+

@@ -17,10 +17,12 @@ run_brew() {
         local list_formulae
         local -a missing_formulae
         local -a desired_formulae=(
+            'ack'
             'apktool'
             'bash-completion@2'
             # 'bundle'
             'dockutil'
+            'git-delta'
             'node'
             'scrcpy'
             'tldr'
