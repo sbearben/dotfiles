@@ -23,6 +23,7 @@ run_brew() {
             # 'bundle'
             'dockutil'
             'git-delta'
+            'git-extras'
             'node'
             'scrcpy'
             'tldr'
