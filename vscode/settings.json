@@ -3,7 +3,11 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.colorCustomizations": {
-    "editorRuler.foreground": "#303030"
+    "[Default Dark+]": {
+      "editorRuler.foreground": "#303030",
+      "tab.activeBackground": "#1f3d59",
+      "tab.activeBorder": "#00ccff"
+    }
   },
   "window.zoomLevel": 0,
   "explorer.autoReveal": false,
@@ -11,7 +15,7 @@
   "editor.renderLineHighlight": "none",
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "editor.formatOnSave": true,
   "editor.rulers": [80],
