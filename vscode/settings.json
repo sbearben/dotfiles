@@ -6,7 +6,9 @@
     "[Default Dark+]": {
       "editorRuler.foreground": "#303030",
       "tab.activeBackground": "#1f3d59",
-      "tab.activeBorder": "#00ccff"
+      "tab.activeBorder": "#00ccff",
+      // Color for squiggly underline of "info" (spelling mistaks with spell-checking extension, for example)
+      "editorInfo.foreground": "#ab87ff"
     }
   },
   "window.zoomLevel": 0,
@@ -47,4 +49,11 @@
   "C_Cpp.updateChannel": "Insiders",
 
   "gitlens.mode.active": "zen",
+
+  // Spell-check extension
+  "cSpell.enabledLanguageIds": [
+    "markdown"
+  ],
+  "cSpell.enabled": true,
+  "cSpell.showStatus": false  // Display spell checker status on the status bar.
 }

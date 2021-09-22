@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install_vscode_extensions() {
-    # Visual Studio Code :: Package list
+    # Visual Studio Code :: Extension list
     local -a pkglist=(
         DavidAnson.vscode-markdownlint
         dbaeumer.vscode-eslint
@@ -16,6 +16,7 @@ install_vscode_extensions() {
         ms-vscode.vscode-typescript-tslint-plugin
         naumovs.color-highlight
         rbbit.typescript-hero
+        streetsidesoftware.code-spell-checker
         timonwong.shellcheck
         Tyriar.lorem-ipsum
     )
