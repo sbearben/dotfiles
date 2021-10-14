@@ -24,6 +24,7 @@ run_brew() {
             'dockutil'
             'git-delta'
             'git-extras'
+            'gradle-completion'
             # A command-line tool that makes git easier to use with github: github.com/github/hub
             'hub'
             # CLI tool for image editing
