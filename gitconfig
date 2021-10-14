@@ -1,6 +1,6 @@
 [user]
 	name = Armon Khosravi
-	# email = 
+	# email =
 
 [github]
 	user = sbearben
@@ -36,3 +36,5 @@
 	line-numbers-left-style = blue
 	line-numbers-right-style = blue
 
+[tig]
+	vertical-split = true
