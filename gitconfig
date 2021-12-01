@@ -8,6 +8,19 @@
 [init]
 	defaultBranch = main
 
+[alias]
+	# Shorthands
+	br = branch
+	brr = branch --remote
+	ci = commit
+	co = checkout
+	st = status
+	last = "log -1 HEAD"
+  adne = "commit --amend --no-edit"
+	# Actions
+	open-gh = !"git remote -v | awk '/origin.*push/ {print $2}' | xargs open"
+	last-sha = "!f() { git rev-list HEAD --reverse | tail -\"${1:-1}\"; }; f"
+
 # [credential]
 	# helper = osxkeychain
 
@@ -33,7 +46,7 @@
 	# side-by-side = true
 
 [delta "line-numbers"]
-	line-numbers = true
+	line-numbers = false
 	line-numbers-left-format = "{nm:>4}┊"
 	line-numbers-right-format = "{np:>4}│"
 	line-numbers-left-style = blue
