@@ -5,6 +5,9 @@
 [github]
 	user = sbearben
 
+[init]
+	defaultBranch = main
+
 # [credential]
 	# helper = osxkeychain
 
