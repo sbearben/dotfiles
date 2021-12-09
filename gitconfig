@@ -15,6 +15,7 @@
 	ci = commit
 	co = checkout
 	st = status
+        fp = push -f
 	last = "log -1 HEAD"
   adne = "commit --amend --no-edit"
 	# Actions
