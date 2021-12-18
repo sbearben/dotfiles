@@ -81,3 +81,8 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR
 
 " Change default mapping and the default command to invoke CtrlP
 let g:ctrl_map = 'CtrlP'
+
+" Mapping to insert newline without leaving normal mode
+nnoremap <silent> [<space>  :<c-u>put!=repeat([''],v:count)<bar>']+1<cr>
+nnoremap <silent> ]<space>  :<c-u>put =repeat([''],v:count)<bar>'[-1<cr>
+
