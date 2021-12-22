@@ -1,6 +1,0 @@
-mdi: <img src="" width="300" />
-
-mdt:
-| Title1        | Title2 |
-| ------------- |:-------------:|
-| <img src="" width="250" />      | <img src="" width="250" /> |
