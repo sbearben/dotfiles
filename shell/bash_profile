@@ -1,5 +1,11 @@
 PS1='\w\n\$ '
 
+# Load the shell dotfiles, and then some:
+for file in ~/${HOME}/.dotfiles/shell/{bash_prompt,bash_aliases}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
 # Android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
