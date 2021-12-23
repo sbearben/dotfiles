@@ -13,6 +13,8 @@ install_applications() {
     _install google-chrome
     # Tool for OS X automation: https://www.hammerspoon.org/
     _install hammerspoon
+    # Open source bettersnaptool alternative
+    _install rectangle
     _install slack
     _install spotify
     _install visual-studio-code
