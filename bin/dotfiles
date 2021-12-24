@@ -78,7 +78,7 @@ if ! is_git_repo; then
     git fetch origin main
     # Reset the index and working tree to the fetched HEAD
     # (submodules are cloned in the subsequent sync step)
-    get reset --hard FETCH_HEAD
+    git reset --hard FETCH_HEAD
     # Remove any untracked files
     git clean -fd
 fi
