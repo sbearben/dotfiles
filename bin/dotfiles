@@ -159,7 +159,7 @@ fi
 seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
-    bash ./bin/osxdefaults
+    bash ./macos/macosdefaults
     e_success "macOS settings updated! You may need to restart."
 else
     printf "Skipped macOS settings update.\n"
