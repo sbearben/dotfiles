@@ -31,8 +31,9 @@ run_brew() {
             'imagemagick'
             'node'
             'scrcpy'
+            'shellcheck'
             # https://jonas.github.io/tig/ 
-            'tig'
+            # 'tig'
             'tldr'
             # Get password of the wifi you're on
             'wifi-password'
