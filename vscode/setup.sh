@@ -32,4 +32,3 @@ symlink_vscode_settings() {
     # Note: when creating symbolic links we need to use the absolute source path or won't work
     ln -fs "${1}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
 }
-
