@@ -37,6 +37,7 @@ run_brew() {
             'tldr'
             # Get password of the wifi you're on
             'wifi-password'
+            'yarn'
         )
 
         # Syntax below expands an array to a list of its indices
