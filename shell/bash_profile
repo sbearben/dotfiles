@@ -6,6 +6,10 @@ for file in ~/${HOME}/.dotfiles/shell/{bash_prompt,bash_aliases}; do
 done;
 unset file;
 
+# dev and brew
+if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
 # Android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
