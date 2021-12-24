@@ -1,3 +1,5 @@
 # Shortcuts
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
+
+alias clean-quarantine="xattr -dr com.apple.quarantine ."
