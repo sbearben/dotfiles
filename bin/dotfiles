@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# set -eo pipefail
+
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/sbearben/dotfiles/tarball/main"
 DOTFILES_GIT_REMOTE="git@github.com:sbearben/dotfiles.git"
