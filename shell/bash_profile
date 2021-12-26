@@ -1,7 +1,7 @@
 PS1='\w\n\$ '
 
 # Load the shell dotfiles, and then some:
-for file in ~/${HOME}/.dotfiles/shell/{bash_prompt,bash_aliases}; do
+for file in ${HOME}/.dotfiles/shell/{bash_aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
