@@ -1,5 +1,5 @@
 [include]
-	path = ~/.dotfiles/.gituser
+	path = ~/.dotfiles/gituser
 
 [github]
 	user = sbearben
