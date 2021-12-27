@@ -91,8 +91,10 @@ if [[ $install_apps ]]; then
     # Install macOS apps via cask
     install_applications
     # Post-installation vscode setup
+    e_header "Installing vscode extensions"
     install_vscode_extensions
     symlink_vscode_settings "${DOTFILES_DIRECTORY}"
+    e_success "Done"
 else
     printf "Skipped installing applications.\n"
 fi
