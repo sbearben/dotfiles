@@ -1,0 +1,6 @@
+[user]
+	name = Armon Khosravi
+	email = email@email.com
+
+[credential]
+	helper = osxkeychain
