@@ -1,12 +1,9 @@
 [include]
+	# Can contain config like `user`, `credentials`, etc. (user specific config)
 	path = ~/.dotfiles/gituser
 
 [github]
 	user = sbearben
-
-[credential]
-	helper = 
-	helper = store --file /opt/dev/var/private/git_credential_store
 
 [init]
 	defaultBranch = main
@@ -24,9 +21,6 @@
 	# Actions
 	open-gh = !"git remote -v | awk '/origin.*push/ {print $2}' | xargs open"
 	last-sha = "!f() { git rev-list HEAD --reverse | tail -\"${1:-1}\"; }; f"
-
-# [credential]
-	# helper = osxkeychain
 
 [core]
 	commitGraph = true
