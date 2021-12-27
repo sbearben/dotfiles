@@ -133,13 +133,22 @@ defaults write com.apple.TextEdit RichText -int 0
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
+# Flux                                                                        #
+###############################################################################
+
+defaults write org.herf.Flux dayColorTemp -int 3500
+defaults write org.herf.Flux nightColorTemp -int 3000
+defaults write org.herf.Flux lateColorTemp -int 2700
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
 for app in "Activity Monitor" \
         "Dock" \
         "Finder" \
-        "Photos"; do
+        "Photos" \
+        "Flux"; do
         killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
