@@ -72,6 +72,17 @@ if ! type_exists 'git'; then
     brew install git
 fi
 
+# Check bash version, install updated version from brew if needed
+if [[ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 5 ]]; then
+    e_header "Updating Homebrew..."
+    brew update
+    e_header "Installing newer version of bash..."
+    brew install bash
+    e_success "Installed updated version of bash."
+    printf " Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
+    exit 1
+fi
+
 # Initialize the git repository if it's missing
 if ! is_git_repo; then
     e_header "Initializing git repository..."
