@@ -22,6 +22,8 @@
   "editor.formatOnSave": true,
   "editor.rulers": [80],
 
+  "files.insertFinalNewline": true,
+
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -58,5 +60,6 @@
     "markdown"
   ],
   "cSpell.enabled": true,
-  "cSpell.showStatus": false  // Display spell checker status on the status bar.
+  // Display spell checker status on the status bar.
+  "cSpell.showStatus": false
 }
