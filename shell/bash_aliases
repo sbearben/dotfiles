@@ -2,6 +2,9 @@
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 
+alias ls="ls -G"
+alias ll="ls -lG"
+
 # Apple extended-attributes
 alias ls@="ls -al@"
 alias clean-quarantine="xattr -dr com.apple.quarantine ."
