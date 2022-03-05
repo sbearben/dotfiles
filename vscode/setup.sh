@@ -19,6 +19,10 @@ install_vscode_extensions() {
         streetsidesoftware.code-spell-checker
         timonwong.shellcheck
         Tyriar.lorem-ipsum
+        # Ruby extensions
+        rebornix.ruby
+        wingrunr21.vscode-ruby
+        castwide.solargraph
     )
 
     for EXT in "${pkglist[@]}"; do

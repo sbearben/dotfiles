@@ -24,6 +24,10 @@
 
   "files.insertFinalNewline": true,
 
+  "files.associations": {
+    "*.html.erb": "html"
+  },
+
   "eslint.validate": [
     "javascript",
     "javascriptreact",
