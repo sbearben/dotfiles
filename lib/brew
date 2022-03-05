@@ -21,6 +21,8 @@ run_brew() {
             'apktool'
             'bash-completion@2'
             # 'bundle'
+            # Ruby environment tool
+            'chruby'
             'dockutil'
             'git-delta'
             'git-extras'
