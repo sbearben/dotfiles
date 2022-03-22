@@ -32,6 +32,8 @@ run_brew() {
             # CLI tool for image editing
             'imagemagick'
             'node'
+            # Install different versions of ruby
+            'ruby-install'
             'scrcpy'
             'shellcheck'
             # https://jonas.github.io/tig/ 

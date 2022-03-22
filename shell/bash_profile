@@ -36,3 +36,7 @@ elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion;
 fi;
 
+# Source chruby so it becomes source of truth for ruby version to use
+CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
+source "$CHRUBY_PATH"/chruby.sh
+source "$CHRUBY_PATH"/auto.sh
