@@ -15,8 +15,9 @@
 	ci = commit
 	co = checkout
 	st = status
-        fp = push -f
+	fp = push -f
 	last = "log -1 HEAD"
+	clean-all = "clean -fd"
   adne = "commit --amend --no-edit"
 	# Actions
 	open-gh = !"git remote -v | awk '/origin.*push/ {print $2}' | xargs open"
