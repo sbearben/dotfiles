@@ -27,6 +27,7 @@ run_brew() {
             'git-delta'
             'git-extras'
             'gradle-completion'
+            'hammerspoon'
             # A command-line tool that makes git easier to use with github: github.com/github/hub
             'hub'
             # CLI tool for image editing
