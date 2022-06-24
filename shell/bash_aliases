@@ -7,6 +7,9 @@ alias ll="ls -lG"
 
 alias csh-bash="chsh -s /bin/bash"
 
+# Link the brew openjdk installation so system can find it
+alias ln-brew-jdk="ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
+
 # Apple extended-attributes
 alias ls@="ls -al@"
 alias clean-quarantine="xattr -dr com.apple.quarantine ."
