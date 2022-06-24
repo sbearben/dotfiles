@@ -165,8 +165,7 @@ if is_confirmed; then
     mirrorfiles
     source "${HOME}/.bash_profile"
 else
-    printf "Aborting...\n"
-    exit 1
+    printf "Skipped symlinking dotfiles to root.\n"
 fi
 
 # Ask before potentially overwritting macOS defaults
