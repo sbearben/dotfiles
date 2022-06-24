@@ -144,6 +144,12 @@ defaults write org.herf.Flux nightColorTemp -int 3000
 defaults write org.herf.Flux lateColorTemp -int 2700
 
 ###############################################################################
+# Chrome                                                                      #
+###############################################################################
+
+defaults write com.google.chrome NSNavLastRootDirectory -string "$HOME/Desktop"
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
