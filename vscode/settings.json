@@ -41,7 +41,7 @@
   },
 
   "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.inlayHints.parameterNames.enabled": "literals", // values: "none" | "all" | "literals"
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -60,9 +60,7 @@
   "gitlens.mode.active": "zen",
 
   // Spell-check extension
-  "cSpell.enabledLanguageIds": [
-    "markdown"
-  ],
+  "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.enabled": true,
   // Display spell checker status on the status bar.
   "cSpell.showStatus": false

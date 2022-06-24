@@ -5,6 +5,8 @@ alias dt="cd ~/Desktop"
 alias ls="ls -G"
 alias ll="ls -lG"
 
+alias csh-bash="chsh -s /bin/bash"
+
 # Apple extended-attributes
 alias ls@="ls -al@"
 alias clean-quarantine="xattr -dr com.apple.quarantine ."
