@@ -60,6 +60,8 @@ fi
 
 # Check for Homebrew
 if ! type_exists 'brew'; then
+    # Brew installation will look for .bash_profile after being installed - create it if it doesn't exist (will be overwritten later)
+    touch -a "${HOME}/.bash_profile"
     e_header "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
