@@ -68,7 +68,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 ###############################################################################
-# Dock, Dashboard, and hot corners, etc.                                      #
+# Dock, Dashboard, Menu bar, and hot corners, etc.                            #
 ###############################################################################
 
 # Set the icon size of Dock items to 56 pixels
@@ -108,6 +108,10 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # Use F1, F2, etc. keys as standard function keys
 defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1"
+
+# Add bluetooth icon to menu bar
+defaults write com.apple.systemuiserver menuExtras -array \
+        "System/Library/CoreServices/Menu Extras/Bluetooth.menu"
 
 ###############################################################################
 # Activity Monitor                                                            #
@@ -157,6 +161,7 @@ for app in "Activity Monitor" \
         "Dock" \
         "Finder" \
         "Photos" \
+        "SystemUIServer" \
         "Flux"; do
         killall "${app}" &> /dev/null
 done
