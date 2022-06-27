@@ -113,6 +113,9 @@ defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1"
 defaults write com.apple.systemuiserver menuExtras -array \
         "System/Library/CoreServices/Menu Extras/Bluetooth.menu"
 
+# Make right-side of magic mouse be right-click
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse -string "TwoButton"
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
