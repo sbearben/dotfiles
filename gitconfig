@@ -21,7 +21,14 @@
 	dlb = branch -D @{-1}
   adne = "commit --amend --no-edit"
 	# Actions
-	open-gh = !"git remote -v | awk '/origin.*push/ {print $2}' | xargs open"
+	open-gh = "!f() { \
+		open \"$(git ls-remote --get-url $(git config --get branch.$(git branch --show-current).remote) \
+    | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
+    | sed 's|\\.git$||'; \
+    )/compare/$(\
+    git config --get branch.$(git branch --show-current).merge | cut -d '/' -f 3- \
+    )?expand=1\"; \
+	}; f"
 	last-sha = "!f() { git rev-list HEAD --reverse | tail -\"${1:-1}\"; }; f"
 
 [core]
