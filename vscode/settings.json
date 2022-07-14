@@ -63,5 +63,6 @@
   "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.enabled": true,
   // Display spell checker status on the status bar.
-  "cSpell.showStatus": false
+  "cSpell.showStatus": false,
+  "gitlens.plusFeatures.enabled": false
 }
