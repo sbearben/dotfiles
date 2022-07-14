@@ -51,3 +51,36 @@ function bundleid() {
 	fi
   /usr/libexec/PlistBuddy -c Print:CFBundleIdentifier /Applications/"$1".app/Contents/Info.plist
 }
+
+
+##################################################
+# Android/adb hepers                             #
+##################################################
+
+function adb_snap() {
+  if [ $# -eq 0 ]
+  then
+    name="adb_screenshot.png"
+  else
+    name="$1.png"
+  fi
+  adb shell screencap -p /sdcard/"$name"
+  adb pull /sdcard/"$name"
+  adb shell rm /sdcard/"$name"
+  curr_dir=pwd
+  echo "save to $(pwd)/$name"
+}
+
+function adb_record() {
+  if [ $# -eq 0 ]
+  then
+    name="adb_recording.mp4"
+  else
+    name="$1.mp4"
+  fi
+  adb shell screenrecord /sdcard/"$name"
+  adb pull /sdcard/"$name"
+  adb shell rm /sdcard/"$name"
+  curr_dir=pwd
+  echo "save to $(pwd)/$name"
+}
