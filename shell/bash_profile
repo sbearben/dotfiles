@@ -20,6 +20,9 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Add VSCode to path
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# Needed for `n`/node version management
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
 
 # Jdk path - currently v.11
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
@@ -40,3 +43,8 @@ fi;
 CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
 source "$CHRUBY_PATH"/chruby.sh
 source "$CHRUBY_PATH"/auto.sh
+
+# Brex setup for asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
