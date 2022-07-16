@@ -7,7 +7,7 @@ Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME and `.vim` directories.
 
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/sbearben/dotfiles/main/bin/dotfiles)"
+$ bash -c "$(curl -fsSL raw.github.com/sbearben/dotfiles/main/bin/dotfiles)" bash --install-apps
 ```
 
 ## How to update
