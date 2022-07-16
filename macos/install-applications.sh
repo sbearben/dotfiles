@@ -3,7 +3,7 @@
 # Install mac applications
 
 _install() {
-  brew install --cask "$1"
+  brew install --cask "$1" || true
 }
 
 install_applications() {
