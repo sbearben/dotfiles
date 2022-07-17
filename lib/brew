@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 
-run_brew() {
+OPEN_JDK_11='openjdk@11'
+
+function after_installing_formulae() {
+    local -a arr=("$@")
+    for formulae in "${arr[@]}"
+    do
+        # Make sure formulae was actually installed in the previous step
+        if formula_exists "$formulae"; then
+            if [ "$formulae" = "$OPEN_JDK_11" ]; then
+                # needs sudo?
+                ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+            fi
+        fi
+    done
+}
+
+function run_brew() {
     # Check for Homebrew
     if type_exists 'brew'; then
         e_header "Updating Homebrew..."
@@ -32,6 +48,7 @@ run_brew() {
             'hub'
             # CLI tool for image editing
             'imagemagick'
+            "$OPEN_JDK_11"
             'node'
             # Install different versions of ruby
             'ruby-install'
@@ -62,8 +79,10 @@ run_brew() {
             # Install all missing formulae
             # shellcheck disable=SC2086
             brew install $list_formulae
+            [[ $? ]] && e_success "Finished installing homebrew formulae"
 
-            [[ $? ]] && e_success "Done"
+            after_installing_formulae "${missing_formulae[@]}"
+            [[ $? ]] && e_success "Finished post formulae installation step"
         fi
 
         # Use latest rsync rather than outdated OS X rsync
@@ -81,4 +100,4 @@ run_brew() {
 
 }
 
-
+unset OPEN_JDK_11
