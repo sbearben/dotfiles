@@ -35,7 +35,7 @@ function run_brew() {
         local -a desired_formulae=(
             'ack'
             'apktool'
-            'bash-completion@2'
+            'bash-completion'
             # 'bundle'
             # Ruby environment tool
             'chruby'
