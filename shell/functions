@@ -52,6 +52,22 @@ function bundleid() {
   /usr/libexec/PlistBuddy -c Print:CFBundleIdentifier /Applications/"$1".app/Contents/Info.plist
 }
 
+# Base64 encode the provided string
+function b64e() {
+  if [ $# -eq 0 ]; then
+		echo "b64e requires an argument for the string to encode" && return 1
+	fi
+  echo "$1" | base64
+}
+
+# Decode the provided base64 encoded string
+function b64d() {
+  if [ $# -eq 0 ]; then
+		echo "b64d requires an argument for the string to decode" && return 1
+	fi
+  echo "$1" | base64 -d ; echo
+}
+
 
 ##################################################
 # Android/adb hepers                             #
