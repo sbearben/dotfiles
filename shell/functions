@@ -67,7 +67,6 @@ function adb_snap() {
   adb shell screencap -p /sdcard/"$name"
   adb pull /sdcard/"$name"
   adb shell rm /sdcard/"$name"
-  curr_dir=pwd
   echo "save to $(pwd)/$name"
 }
 
@@ -78,9 +77,13 @@ function adb_record() {
   else
     name="$1.mp4"
   fi
+  echo "Starting recording, press CTRL+C when you're done..."
+  trap "echo 'Recording stopped, downloading output...'" INT
   adb shell screenrecord /sdcard/"$name"
+  trap - INT
+  sleep 5
   adb pull /sdcard/"$name"
+  sleep 1
   adb shell rm /sdcard/"$name"
-  curr_dir=pwd
-  echo "save to $(pwd)/$name"
+
 }
