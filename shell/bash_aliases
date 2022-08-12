@@ -4,6 +4,7 @@ alias dt="cd ~/Desktop"
 
 alias ls="ls -G"
 alias ll="ls -lG"
+alias gls="gls --group-directories-first --color --time-style='+%Y/%m/%d %H:%M:%S'"
 
 alias csh-bash="chsh -s /bin/bash"
 
