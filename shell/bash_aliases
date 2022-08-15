@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Shortcuts
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
