@@ -30,6 +30,9 @@
     )?expand=1\"; \
 	}; f"
 	last-sha = "!f() { git rev-list HEAD --reverse | tail -\"${1:-1}\"; }; f"
+	po = "!f() { \
+		git push -u origin \"$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/')\"; \
+	}; f"
 
 [core]
 	commitGraph = true
