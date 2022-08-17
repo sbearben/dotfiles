@@ -40,12 +40,13 @@ function run_brew() {
             # Ruby environment tool
             'chruby'
             'dockutil'
+            'git'
             'git-delta'
             'git-extras'
             'gradle-completion'
             'hammerspoon'
             # A command-line tool that makes git easier to use with github: github.com/github/hub
-            'hub'
+            # 'hub'
             # CLI tool for image editing
             'imagemagick'
             "$OPEN_JDK_11"
