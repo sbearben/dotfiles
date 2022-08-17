@@ -28,6 +28,12 @@ __prompt_command() {
 }
 HISTTIMEFORMAT="%F %T "
 
+# Better bash completion exp: https://unix.stackexchange.com/a/527944
+bind '"\t":menu-complete'
+bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on"
+bind "set menu-complete-display-prefix on"
+
 # Load the shell dotfiles, and then some:
 for file in ${HOME}/.dotfiles/shell/{bash_aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
