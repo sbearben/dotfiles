@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
+# Function that could be used for an error trap handler
+function die() {
+  echo "ERROR $? IN ${BASH_SOURCE[0]} AT LINE ${BASH_LINENO[0]}" 1>&2
+  log_stack
+  exit 1
+}
+
+# Logs a stack dump
+function log_stack() {
+     local i=0
+     local FRAMES=${#BASH_LINENO[@]}
+     # FRAMES-2 skips main, the last one in arrays
+     for ((i=FRAMES-2; i>=0; i--)); do
+         echo "  File \"${BASH_SOURCE[i+1]}\", line ${BASH_LINENO[i]}, in ${FUNCNAME[i+1]}"
+         # Grab the source code of the line
+         #sed -n "${BASH_LINENO[i]}{s/^/    /;p}" "${BASH_SOURCE[i+1]}"
+     done
+     return 0
+}
+
 # Header logging
 e_header() {
     printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
