@@ -81,7 +81,13 @@ if [[ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 5 ]]; then
     e_header "Installing newer version of bash..."
     brew install bash
     e_success "Installed updated version of bash."
-    printf " Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
+    e_header "Changing default shell to bash v5..."
+    if ! grep -qF "${HOMEBREW_PREFIX}"/bin/bash "/etc/shells"; then
+        echo "${HOMEBREW_PREFIX}"/bin/bash | sudo tee -a /etc/shells
+    fi
+    chsh -s "${HOMEBREW_PREFIX}"/bin/bash
+    e_success "Default shell is now bash v5."
+    printf "Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
     exit 1
 fi
 
