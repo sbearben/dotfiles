@@ -37,6 +37,7 @@ function run_brew() {
             'apktool'
             'bash-completion'
             # 'bundle'
+            'cheatsheet'
             # Ruby environment tool
             'chruby'
             'dockutil'
