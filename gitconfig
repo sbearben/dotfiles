@@ -20,6 +20,8 @@
 	clean-all = "clean -fd"
 	dlb = branch -D @{-1}
   adne = "commit --amend --no-edit"
+	rc = "rebase --continue"
+	ra = "rebase --abort"
 	# Actions
 	open-gh = "!f() { \
 		open \"$(git ls-remote --get-url $(git config --get branch.$(git branch --show-current).remote) \
