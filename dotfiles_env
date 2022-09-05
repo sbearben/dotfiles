@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+export DOTFILES_EXT_DIRECTORY="${HOME}/.dotfiles_exts"
+
 # Source config, as env files depend on it.
-source "$DOTFILES_DIR/config" 2>/dev/null
+source "$DOTFILES_DIRECTORY/config" 2>/dev/null
 
 if [ -n "$DOTFILES_EXT_PATH" ]; then
   [ -f "${DOTFILES_EXT_PATH}/gitconfig" ] && export EXT_GITCONFIG="${DOTFILES_EXT_PATH}/gitconfig"

@@ -20,10 +20,12 @@ fi
 
 cd "${DOTFILES_DIRECTORY}" || exit
 
+source ./dotfiles_env
 source ./lib/help
 source ./lib/list
 source ./lib/utils
 source ./lib/brew
+source ./lib/extensions
 source ./macos/install-applications.sh
 source ./vscode/setup.sh
 
@@ -39,15 +41,42 @@ if [[ "$1" == "-l" || "$1" == "--list" ]]; then
     exit
 fi
 
-# Test for known flags
-for opt in "$@"
-do
-    case $opt in
+# Initialize arguments
+no_packages=false
+no_sync=false
+install_apps=false
+extensions_repo_remote=
+extensions_repo_local="$DOTFILES_EXT_DIRECTORY"
+
+# Extract provided arguments.
+# Performing no validation of provided arguments. But providing `extensions-local`
+# witbout providing `extensions-remote` would be an invariant.
+while :; do
+    case $1 in
         --no-packages) no_packages=true ;;
         --no-sync) no_sync=true ;;
         --install-apps) install_apps=true ;;
+        --extensions-remote)
+            if [ "$2" ]; then
+                extensions_repo_remote=$2
+                shift
+            else
+                e_error 'Option "--extensions-remote" requires a non-empty argument.'
+                exit 1
+            fi
+            ;;
+        --extensions-local)
+            if [ "$2" ]; then
+                extensions_repo_local=$2
+                shift
+            else
+                e_error 'Option "--extensions-local" requires a non-empty argument.'
+                exit 1
+            fi
+            ;;
         --*|-*) e_warning "Warning: invalid option $opt" ;;
     esac
+    shift
 done
 
 # Before relying on Homebrew, check that packages can be compiled
@@ -113,6 +142,14 @@ else
     git pull --rebase origin main
     # Update submodules
     git submodule update --recursive --init --quiet
+fi
+
+# Initializes and sets up provided extensions repo
+if [[ $extensions_repo_remote ]]; then
+    download_extensions_repo "$extensions_repo_remote" "$extensions_repo_local"
+    create_dotfiles_config "$extensions_repo_local"
+else
+    printf "Skipped initializing extensions repo.\n"
 fi
 
 # First insall applications if desired

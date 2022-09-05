@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-export DOTFILES_DIR="${HOME}/.dotfiles"
 # Source dotfile_env to set up variables needed for extensions.
-source "$DOTFILES_DIR/dotfiles_env"
-
+source "${HOME}/.dotfiles/dotfiles_env"
 
 # Set PSI (bash prompt)
 parse_git_branch() {
@@ -89,4 +87,4 @@ source "$CHRUBY_PATH"/chruby.sh
 source "$CHRUBY_PATH"/auto.sh
 
 # Init bash dotfile extensions
-source "$DOTFILES_DIR"/shell/bash_ext_init
+source "$DOTFILES_DIRECTORY"/shell/bash_ext_init

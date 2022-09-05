@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+source ./utils
+source ../dotfiles_env
+
+#######################################
+# Downloads the remote extensons repo and creates the local directory.
+# Globals:
+#   HOME
+# Arguments:
+#   Location of remote extensions repo (required).
+#     - Assumes repo uses 'main' for main branch (not 'master')
+#     - Should be a direct link to the repo.
+#       Example: https://github.com/user/some_ext_repo
+#   Location of local extensions directory (required).
+# Outputs:
+#   Creates the local extensions directory.
+#######################################
+function download_extensions_repo() {
+  local remote_ext_repo="$1"
+  local local_ext_path="$2"
+  local remote_ext_tarball_path="${remote_ext_repo}/tarball/main"
+
+  # Ensure expected arguments are provided
+  if [[ -z "$remote_ext_repo" || -z "$local_ext_path" ]]; then
+    e_error "Two arguments required, specifying the remote extensions \
+      repo location, and local extensions repo destination" && return 1
+  fi
+
+  if [[ ! -d "$local_ext_path" ]]; then
+  e_header "Initializing extensions repository..."
+    printf "$(tput setaf 7)Downloading dotfiles extensions: %s\033[m\n" "${remote_ext_repo}"
+    mkdir "${local_ext_path}"
+    # Get the tarball
+    curl -fsSLo "${HOME}"/dotfiles_exts.tar.gz ${remote_ext_tarball_path}
+    # Extract to the dotfiles directory
+    tar -zxf "${HOME}"/dotfiles_exts.tar.gz --strip-components 1 -C "${local_ext_path}"
+    # Remove the tarball
+    rm -rf "${HOME}"/dotfiles_exts.tar.gz
+    e_success "Done"
+  fi
+}
+
+#######################################
+# Creates dotfiles config file.
+# Globals:
+#   DOTFILES_DIRECTORY
+#   DOTFILES_EXT_DIRECTORY
+# Arguments:
+#   Location of local extensions directory (optional).
+# Outputs:
+#   Creates config file in root of dotfiles directory.
+#######################################
+function create_dotfiles_config() {
+  local local_ext_path="$1"
+  
+  # Use default dotfiles extensions location if one isn't provided
+  if [[ -z "$local_ext_path" ]]; then
+    local_ext_path="$DOTFILES_EXT_DIRECTORY"
+  fi
+
+  # Ensure dotfiles extensions directory exists
+  if [[ ! -d "$local_ext_path" ]]; then
+    e_error "No dotfiles extensions repo exists at: ${local_ext_path}"
+    return 1
+  fi
+
+  # Create config file
+  e_header "Creating 'config' file"
+  echo "export DOTFILES_EXT_PATH=${local_ext_path}" > "${DOTFILES_DIRECTORY}/config"
+  e_success "Done"
+}
