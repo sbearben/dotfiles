@@ -3,36 +3,7 @@
 # Source dotfile_env to set up variables needed for extensions.
 source "${HOME}/.dotfiles/dotfiles_env"
 
-# Set PSI (bash prompt)
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:(\1)/'
-}
-PROMPT_COMMAND="__prompt_command; $PROMPT_COMMAND"
-__prompt_command() {
-  local EXIT="$?"
-  PS1=""
-
-  local RCol='\[\e[0m\]'
-  local RBCol='\[\e[1m\]'
-  local LGrey='\[\e[00;37m\]'
-
-  local Gre='\[\e[0;32m\]'
-  local BRed='\[\e[1;31m\]'
-  local BBlue='\[\e[1;34m\]'
-
-  
-  if [ $EXIT != 0 ]; then
-      PS1+="${BRed}✘${RCol}"
-  else
-      PS1+="${Gre}✔${RCol}"
-  fi
-
-  PS1+="${LGrey}[\D{%T}] "
-  PS1+="${BBlue}\w"
-  PS1+="${RCol}${RBCol}$(parse_git_branch)\n${RCol}$ "
-}
 HISTTIMEFORMAT="%F %T "
-
 # Better bash completion exp: https://unix.stackexchange.com/a/527944
 bind '"\t":menu-complete'
 bind "set show-all-if-ambiguous on"
@@ -40,7 +11,7 @@ bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
 
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/.dotfiles/shell/{bash_aliases,functions}; do
+for file in ${HOME}/.dotfiles/shell/{bash_prompt,bash_aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

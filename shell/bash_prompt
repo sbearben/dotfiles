@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Set PSI (bash prompt)
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:(\1)/'
+}
+PROMPT_COMMAND="__prompt_command; $PROMPT_COMMAND"
+__prompt_command() {
+  local EXIT="$?"
+  PS1=""
+
+  local RCol='\[\e[0m\]'
+  local RBCol='\[\e[1m\]'
+  local LGrey='\[\e[00;37m\]'
+
+  local Gre='\[\e[0;32m\]'
+  local BRed='\[\e[1;31m\]'
+  local BBlue='\[\e[1;34m\]'
+
+  
+  if [ $EXIT != 0 ]; then
+      PS1+="${BRed}✘${RCol}"
+  else
+      PS1+="${Gre}✔${RCol}"
+  fi
+
+  PS1+="${LGrey}[\D{%T}] "
+  PS1+="${BBlue}\w"
+  PS1+="${RCol}${RBCol}$(parse_git_branch)\n${RCol}$ "
+}
