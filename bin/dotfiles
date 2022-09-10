@@ -24,7 +24,7 @@ source ./dotfiles_env
 source ./lib/help
 source ./lib/list
 source ./lib/utils
-source ./lib/brew
+source ./brew/brew
 source ./lib/extensions
 source ./macos/install-applications.sh
 source ./vscode/setup.sh
