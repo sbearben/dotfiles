@@ -1,6 +1,6 @@
 [include]
 	# Can contain config like `user`, `credentials`, etc. (user specific config)
-	path = ~/.dotfiles/gituser
+	path = ~/.dotfiles/git/gituser
 
 [github]
 	user = sbearben

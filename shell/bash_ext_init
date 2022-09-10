@@ -11,7 +11,7 @@ unset bash_ext;
 # file, unsure how to fix right now.
 if [[ -r "$EXT_GITCONFIG" && -f "$EXT_GITCONFIG" ]]; then
 	git config --global include.path "$EXT_GITCONFIG"
-elif [[ -r "$DOTFILES_DIRECTORY"/gituser && -f "$DOTFILES_DIRECTORY"/gituser ]]; then
+elif [[ -r "$DOTFILES_DIRECTORY"/git/gituser && -f "$DOTFILES_DIRECTORY"/git/gituser ]]; then
 	true
 	# Leave this out for now since it's already the default in `gitconfig`.
 	# git config --global include.path "$DOTFILES_DIRECTORY"/gituser

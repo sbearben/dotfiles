@@ -197,7 +197,7 @@ mirrorfiles() {
     link "shell/bashrc"       ".bashrc"
     link "shell/bash_profile" ".bash_profile"
     link "vimrc"              ".vimrc"
-    link "gitconfig"          ".gitconfig"
+    link "git/gitconfig"      ".gitconfig"
     link "hammerspoon"        ".hammerspoon"
 
     e_success "Dotfiles update complete!"
