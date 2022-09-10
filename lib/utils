@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Generic utils that have no domain-specific knowledge, can be used anywhere.
 
 # Function that could be used for an error trap handler
 function die() {
@@ -80,4 +82,92 @@ function formula_exists() {
 
   e_warning "Missing formula: $1"
   return 1
+}
+
+#######################################
+# Given two json files, performs a deep merge.
+# - Currently, this has a potential side-effect of
+#   sorting the values of any arrays.
+# Arguments:
+#   First json file to merge, a path (required).
+#   Second json file to merge, a path (required).
+# Outputs:
+#   Merged json object to stdout.
+#######################################
+function merge_json() {
+  local json_file1="$1"
+  local json_file2="$2"
+
+  # From: https://stackoverflow.com/a/68362041/7648952
+  # The following will properly deepmerge, however it does cause a side-effect
+  # of sorting arrays alphabetically, so if you have an array in settings that
+  # is order dependent, then this may break it.
+  jq -s 'def deepmerge(a;b):
+    reduce b[] as $item (a;
+      reduce ($item | keys_unsorted[]) as $key (.;
+        $item[$key] as $val | ($val | type) as $type | .[$key] = if ($type == "object") then
+          deepmerge({}; [if .[$key] == null then {} else .[$key] end, $val])
+        elif ($type == "array") then
+          (.[$key] + $val | unique)
+        else
+          $val
+        end)
+      );
+    deepmerge({}; .)' "$json_file1" "$json_file2"
+
+  # Native functionality in jq
+  # jq -s '.[0] * .[1]' "$json_file1" "$json_file2"
+}
+
+#######################################
+# Performs a diff of the given files, with better formatting.
+# - From: https://stackoverflow.com/a/33269762/7648952
+# Arguments:
+#   Source file, a path.
+#   Target file, a path.
+# Outputs:
+#   Diff to stdout.
+#######################################
+function pretty_diff() {
+  local REG
+  REG=$(tput op)
+  local GRP
+  GRP=$(tput setaf 6)
+  local ADD
+  ADD=$(tput setaf 2)
+  local REM
+  REM=$(tput setaf 1)
+
+  local NL=$'\n'
+  local GRP_LABEL="${GRP}@@ %df,%dn +%dF,%dN @@${REG}"
+
+  local UNCH_GRP_FMT=''
+
+  [[ "${1}" == '@full' ]] && {
+    UNCH_GRP_FMT="${GRP_LABEL}${NL}%="
+    shift
+  }
+
+  diff -N \
+      --new-line-format="${ADD}+%L${REG}" \
+      --old-line-format="${REM}-%L${REG}" \
+      --unchanged-line-format=" %L${REG}" \
+      --new-group-format="${GRP_LABEL}${NL}%>" \
+      --old-group-format="${GRP_LABEL}${NL}%<" \
+      --changed-group-format="${GRP_LABEL}${NL}%<%>" \
+      --unchanged-group-format="${UNCH_GRP_FMT}" \
+      "${@}"
+}
+
+#######################################
+# Strip single-line comments from a file.
+# - Currently only strips single-line comments with format '//'
+# Arguments:
+#   File to strip single-line comments, a path.
+# Outputs:
+#   Stripped file to stdout.
+#######################################
+function strip_comments() {
+  local filename=$1
+  sed -e '\|//.*|d' "$filename"
 }

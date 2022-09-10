@@ -50,6 +50,8 @@ function run_brew() {
             # 'hub'
             # CLI tool for image editing
             'imagemagick'
+            # Command line tool for processing json
+            'jq'
             "$OPEN_JDK_11"
             'node'
             # Install different versions of ruby
