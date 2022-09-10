@@ -196,7 +196,7 @@ mirrorfiles() {
     # `.dotfiles` repository.
     link "shell/bashrc"       ".bashrc"
     link "shell/bash_profile" ".bash_profile"
-    link "vimrc"              ".vimrc"
+    link "vim/vimrc"          ".vimrc"
     link "git/gitconfig"      ".gitconfig"
     link "hammerspoon"        ".hammerspoon"
 
