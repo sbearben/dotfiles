@@ -1,0 +1,5 @@
+# cron jobs run with a very minimal environment, including a very basic PATH (just /usr/bin:/bin)
+# - set path here so that it scripts run through cronjobs can find `brew`
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+0 * * * * ../brew/brew-update.sh
+0 * * * * tldr --update
