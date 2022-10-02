@@ -62,15 +62,11 @@ function show_diff_with_current() {
 #######################################
 function install_vscode_settings() {
   e_header "Starting vscode settings installation"
-  local source
+  local source settings_diff
   source=$(create_extended_settings)
 
   # Check if resolved 'source' has diff with 'target'
-  local settings_diff
-  settings_diff=$(pretty_diff <(echo "$source") "$target")
-  local has_diff="$?"
-
-  if [ "$has_diff" -eq 1 ]; then
+  if ! settings_diff="$(pretty_diff <(echo "$source") "$target")"; then
     seek_confirmation "A diff has been detected with the dotfiles settings.json and current vscode settings.json. Do you want to view it?"
     if is_confirmed; then
       echo "$settings_diff"
