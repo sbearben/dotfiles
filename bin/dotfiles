@@ -51,7 +51,7 @@ extensions_repo_local="$DOTFILES_EXT_DIRECTORY"
 # Extract provided arguments.
 # Performing no validation of provided arguments. But providing `extensions-local`
 # witbout providing `extensions-remote` would be an invariant.
-while :; do
+while [[ $# -gt 0 ]]; do
     case $1 in
         --no-packages) no_packages=true ;;
         --no-sync) no_sync=true ;;
@@ -74,7 +74,10 @@ while :; do
                 exit 1
             fi
             ;;
-        --*|-*) e_warning "Warning: invalid option $opt" ;;
+        --*|-*)
+            e_error "Error: invalid option $1"
+            exit 1
+            ;;
     esac
     shift
 done
