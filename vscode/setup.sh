@@ -31,8 +31,8 @@ function install_vscode_extensions() {
 }
 
 # Create symbolic link for settings.json
-# param - location of  dotfiles directory
 function symlink_vscode_settings() {
+  local dotfiles_dir=$1
   # Note: when creating symbolic links we need to use the absolute source path or won't work
-  ln -fs "${1}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
+  ln -fs "${dotfiles_dir}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
 }

@@ -163,7 +163,7 @@ if [[ $install_apps ]]; then
   # Post-installation vscode setup
   e_header "Installing vscode extensions"
   install_vscode_extensions
-  symlink_vscode_settings "${DOTFILES_DIRECTORY}"
+  ./vscode/settings-actions.sh install
   e_success "Done"
 else
   printf "Skipped installing applications.\n"
