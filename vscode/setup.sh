@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-install_vscode_extensions() {
+function install_vscode_extensions() {
   # Visual Studio Code :: Extension list
   local -a pkglist=(
     DavidAnson.vscode-markdownlint
@@ -32,7 +32,7 @@ install_vscode_extensions() {
 
 # Create symbolic link for settings.json
 # param - location of  dotfiles directory
-symlink_vscode_settings() {
+function symlink_vscode_settings() {
   # Note: when creating symbolic links we need to use the absolute source path or won't work
   ln -fs "${1}/vscode/settings.json" "${HOME}/Library/Application Support/Code/User/settings.json"
 }

@@ -2,11 +2,11 @@
 
 # Install mac applications
 
-_install() {
+function _install() {
   brew install --cask "$1" || true
 }
 
-install_applications() {
+function install_applications() {
   _install android-studio
   _install flipper
   _install flux

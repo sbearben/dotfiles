@@ -178,12 +178,12 @@ else
   run_brew
 fi
 
-link() {
+function link() {
   # Force create/replace the symlink.
   ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
-mirrorfiles() {
+function mirrorfiles() {
   # Copy '.gitconfig'
   # Any global git commands in `~/.bash_profile.local` will be written to
   # `.gitconfig`. This prevents them being committed to the repository.
