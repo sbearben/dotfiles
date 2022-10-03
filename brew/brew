@@ -3,104 +3,102 @@
 OPEN_JDK_11='openjdk@11'
 
 function after_installing_formulae() {
-    local -a arr=("$@")
-    for formulae in "${arr[@]}"
-    do
-        # Make sure formulae was actually installed in the previous step
-        if formula_exists "$formulae"; then
-            if [ "$formulae" = "$OPEN_JDK_11" ]; then
-                # needs sudo?
-                ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-            fi
-        fi
-    done
+  local -a arr=("$@")
+  for formulae in "${arr[@]}"; do
+    # Make sure formulae was actually installed in the previous step
+    if formula_exists "$formulae"; then
+      if [ "$formulae" = "$OPEN_JDK_11" ]; then
+        # needs sudo?
+        ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+      fi
+    fi
+  done
 }
 
 function run_brew() {
-    # Check for Homebrew
-    if type_exists 'brew'; then
-        e_header "Updating Homebrew..."
-        # Use the latest version of Homebrew
-        brew update
-        [[ $? ]] && e_success "Done"
+  # Check for Homebrew
+  if type_exists 'brew'; then
+    e_header "Updating Homebrew..."
+    # Use the latest version of Homebrew
+    brew update
+    [[ $? ]] && e_success "Done"
 
-        e_header "Updating any existing Homebrew formulae..."
-        # Upgrade any already-installed formulae
-        brew upgrade
-        [[ $? ]] && e_success "Done"
+    e_header "Updating any existing Homebrew formulae..."
+    # Upgrade any already-installed formulae
+    brew upgrade
+    [[ $? ]] && e_success "Done"
 
-        e_header "Checking status of desired Homebrew formulae..."
-        local list_formulae
-        local -a missing_formulae
-        local -a desired_formulae=(
-            'ack'
-            'apktool'
-            'bash-completion'
-            # 'bundle'
-            'cheatsheet'
-            # Ruby environment tool
-            'chruby'
-            'dockutil'
-            'git'
-            'git-delta'
-            'git-extras'
-            'gradle-completion'
-            'hammerspoon'
-            # A command-line tool that makes git easier to use with github: github.com/github/hub
-            # 'hub'
-            # CLI tool for image editing
-            'imagemagick'
-            # Command line tool for processing json
-            'jq'
-            "$OPEN_JDK_11"
-            'node'
-            # Install different versions of ruby
-            'ruby-install'
-            'scrcpy'
-            'shellcheck'
-            # https://jonas.github.io/tig/ 
-            # 'tig'
-            'tldr'
-            # Get password of the wifi you're on
-            'wifi-password'
-            'yarn'
-        )
+    e_header "Checking status of desired Homebrew formulae..."
+    local list_formulae
+    local -a missing_formulae
+    local -a desired_formulae=(
+      'ack'
+      'apktool'
+      'bash-completion'
+      # 'bundle'
+      'cheatsheet'
+      # Ruby environment tool
+      'chruby'
+      'dockutil'
+      'git'
+      'git-delta'
+      'git-extras'
+      'gradle-completion'
+      'hammerspoon'
+      # A command-line tool that makes git easier to use with github: github.com/github/hub
+      # 'hub'
+      # CLI tool for image editing
+      'imagemagick'
+      # Command line tool for processing json
+      'jq'
+      "$OPEN_JDK_11"
+      'node'
+      # Install different versions of ruby
+      'ruby-install'
+      'scrcpy'
+      'shellcheck'
+      # https://jonas.github.io/tig/ 
+      # 'tig'
+      'tldr'
+      # Get password of the wifi you're on
+      'wifi-password'
+      'yarn'
+    )
 
-        # Syntax below expands an array to a list of its indices
-        for index in ${!desired_formulae[*]}
-        do
-            if ! formula_exists "${desired_formulae[$index]}"; then
-                # Store the name (and options) of every missing formula
-                missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
-            fi
-        done
+    # Syntax below expands an array to a list of its indices
+    for index in ${!desired_formulae[*]}; do
+      if ! formula_exists "${desired_formulae[$index]}"; then
+        # Store the name (and options) of every missing formula
+        missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
+      fi
+    done
 
-        if [[ "$missing_formulae" ]]; then
-            # Convert the array of missing formula into a list of space-separate strings
-            list_formulae=$( printf "%s " "${missing_formulae[@]}" )
+    if [[ "$missing_formulae" ]]; then
+      # Convert the array of missing formula into a list of space-separate strings
+      list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
-            e_header "Installing missing Homebrew formulae..."
-            # Install all missing formulae
-            # shellcheck disable=SC2086
-            brew install $list_formulae
-            [[ $? ]] && e_success "Finished installing homebrew formulae"
+      e_header "Installing missing Homebrew formulae..."
+      # Install all missing formulae
+      # shellcheck disable=SC2086
+      brew install $list_formulae
+      [[ $? ]] && e_success "Finished installing homebrew formulae"
 
-            after_installing_formulae "${missing_formulae[@]}"
-            [[ $? ]] && e_success "Finished post formulae installation step"
-        fi
-
-        # Use latest rsync rather than outdated OS X rsync
-        # install separately from the main formulae as it's specified with a url rather than package name
-        # brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
-
-        # Remove outdated versions from the Cellar
-        brew cleanup
-    else
-        printf "\n"
-        e_error "Error: Homebrew not found."
-        printf "Aborting...\n"
-        exit
+      after_installing_formulae "${missing_formulae[@]}"
+      [[ $? ]] && e_success "Finished post formulae installation step"
     fi
+
+    # Use latest rsync rather than outdated OS X rsync
+    # install separately from the main formulae as it's specified with a url rather than package name
+    # brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
+
+    # Remove outdated versions from the Cellar
+    brew cleanup
+  else
+    printf "\n"
+    e_error "Error: Homebrew not found."
+    printf "Aborting...\n"
+    exit
+  fi
 
 }
 

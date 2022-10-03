@@ -8,14 +8,14 @@ DOTFILES_GIT_REMOTE="https://github.com/sbearben/dotfiles.git"
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
-    printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
-    mkdir "${DOTFILES_DIRECTORY}"
-    # Get the tarball
-    curl -fsSLo "${HOME}"/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
-    # Extract to the dotfiles directory
-    tar -zxf "${HOME}"/dotfiles.tar.gz --strip-components 1 -C "${DOTFILES_DIRECTORY}"
-    # Remove the tarball
-    rm -rf "${HOME}"/dotfiles.tar.gz
+  printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
+  mkdir "${DOTFILES_DIRECTORY}"
+  # Get the tarball
+  curl -fsSLo "${HOME}"/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+  # Extract to the dotfiles directory
+  tar -zxf "${HOME}"/dotfiles.tar.gz --strip-components 1 -C "${DOTFILES_DIRECTORY}"
+  # Remove the tarball
+  rm -rf "${HOME}"/dotfiles.tar.gz
 fi
 
 cd "${DOTFILES_DIRECTORY}" || exit
@@ -31,14 +31,14 @@ source ./vscode/setup.sh
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    run_help
-    exit
+  run_help
+  exit
 fi
 
 # List additional software to install
 if [[ "$1" == "-l" || "$1" == "--list" ]]; then
-    run_list
-    exit
+  run_list
+  exit
 fi
 
 # Initialize arguments
@@ -52,177 +52,177 @@ extensions_repo_local="$DOTFILES_EXT_DIRECTORY"
 # Performing no validation of provided arguments. But providing `extensions-local`
 # witbout providing `extensions-remote` would be an invariant.
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        --no-packages) no_packages=true ;;
-        --no-sync) no_sync=true ;;
-        --install-apps) install_apps=true ;;
-        --extensions-remote)
-            if [ "$2" ]; then
-                extensions_repo_remote=$2
-                shift
-            else
-                e_error 'Option "--extensions-remote" requires a non-empty argument.'
-                exit 1
-            fi
-            ;;
-        --extensions-local)
-            if [ "$2" ]; then
-                extensions_repo_local=$2
-                shift
-            else
-                e_error 'Option "--extensions-local" requires a non-empty argument.'
-                exit 1
-            fi
-            ;;
-        --*|-*)
-            e_error "Error: invalid option $1"
-            exit 1
-            ;;
-    esac
-    shift
+  case $1 in
+    --no-packages) no_packages=true ;;
+    --no-sync) no_sync=true ;;
+    --install-apps) install_apps=true ;;
+    --extensions-remote)
+      if [ "$2" ]; then
+        extensions_repo_remote=$2
+        shift
+      else
+        e_error 'Option "--extensions-remote" requires a non-empty argument.'
+        exit 1
+      fi
+      ;;
+    --extensions-local)
+      if [ "$2" ]; then
+        extensions_repo_local=$2
+        shift
+      else
+        e_error 'Option "--extensions-local" requires a non-empty argument.'
+        exit 1
+      fi
+      ;;
+    --*|-*)
+      e_error "Error: invalid option $1"
+      exit 1
+      ;;
+  esac
+  shift
 done
 
 # Before relying on Homebrew, check that packages can be compiled
 if ! type_exists 'gcc'; then
-    e_error "The XCode Command Line Tools must be installed first."
-    printf " Download them from: https://developer.apple.com/downloads\n"
-    printf " Then run: bash ~/.dotfiles/bin/dotfiles\n"
-    exit 1
+  e_error "The XCode Command Line Tools must be installed first."
+  printf " Download them from: https://developer.apple.com/downloads\n"
+  printf " Then run: bash ~/.dotfiles/bin/dotfiles\n"
+  exit 1
 fi
 
 # Check for Homebrew
 if ! type_exists 'brew'; then
-    # Brew installation will look for .bash_profile after being installed - create it if it doesn't exist (will be overwritten later)
-    touch -a "${HOME}/.bash_profile"
-    e_header "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # Brew installation will look for .bash_profile after being installed - create it if it doesn't exist (will be overwritten later)
+  touch -a "${HOME}/.bash_profile"
+  e_header "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # Check for git
 if ! type_exists 'git'; then
-    e_header "Updating Homebrew..."
-    brew update
-    e_header "Installing Git..."
-    brew install git
+  e_header "Updating Homebrew..."
+  brew update
+  e_header "Installing Git..."
+  brew install git
 fi
 
 # Check bash version, install updated version from brew if needed
 if [[ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 5 ]]; then
-    e_header "Updating Homebrew..."
-    brew update
-    e_header "Installing newer version of bash..."
-    brew install bash
-    e_success "Installed updated version of bash."
-    e_header "Changing default shell to bash v5..."
-    if ! grep -qF "${HOMEBREW_PREFIX}"/bin/bash "/etc/shells"; then
-        echo "${HOMEBREW_PREFIX}"/bin/bash | sudo tee -a /etc/shells
-    fi
-    chsh -s "${HOMEBREW_PREFIX}"/bin/bash
-    e_success "Default shell is now bash v5."
-    printf "Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
-    exit 1
+  e_header "Updating Homebrew..."
+  brew update
+  e_header "Installing newer version of bash..."
+  brew install bash
+  e_success "Installed updated version of bash."
+  e_header "Changing default shell to bash v5..."
+  if ! grep -qF "${HOMEBREW_PREFIX}"/bin/bash "/etc/shells"; then
+    echo "${HOMEBREW_PREFIX}"/bin/bash | sudo tee -a /etc/shells
+  fi
+  chsh -s "${HOMEBREW_PREFIX}"/bin/bash
+  e_success "Default shell is now bash v5."
+  printf "Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
+  exit 1
 fi
 
 # Initialize the git repository if it's missing
 if ! is_git_repo; then
-    e_header "Initializing git repository..."
-    git init
-    git remote add origin ${DOTFILES_GIT_REMOTE}
-    git fetch origin main
-    # Reset the index and working tree to the fetched HEAD
-    # (submodules are cloned in the subsequent sync step)
-    git reset --hard FETCH_HEAD
-    # Remove any untracked files
-    git clean -fd
+  e_header "Initializing git repository..."
+  git init
+  git remote add origin ${DOTFILES_GIT_REMOTE}
+  git fetch origin main
+  # Reset the index and working tree to the fetched HEAD
+  # (submodules are cloned in the subsequent sync step)
+  git reset --hard FETCH_HEAD
+  # Remove any untracked files
+  git clean -fd
 fi
 
 # Conditionally sync with the remote repository
 if [[ $no_sync ]]; then
-    printf "Skipped dotfiles sync.\n"
+  printf "Skipped dotfiles sync.\n"
 else
-    e_header "Syncing dotfiles..."
-    # Pull down the latest changes
-    git pull --rebase origin main
-    # Update submodules
-    git submodule update --recursive --init --quiet
+  e_header "Syncing dotfiles..."
+  # Pull down the latest changes
+  git pull --rebase origin main
+  # Update submodules
+  git submodule update --recursive --init --quiet
 fi
 
 # Initializes and sets up provided extensions repo
 if [[ $extensions_repo_remote ]]; then
-    download_extensions_repo "$extensions_repo_remote" "$extensions_repo_local"
-    create_dotfiles_config "$extensions_repo_local"
+  download_extensions_repo "$extensions_repo_remote" "$extensions_repo_local"
+  create_dotfiles_config "$extensions_repo_local"
 else
-    printf "Skipped initializing extensions repo.\n"
+  printf "Skipped initializing extensions repo.\n"
 fi
 
 # First insall applications if desired
 if [[ $install_apps ]]; then
-    e_header "Installing macOS desktop apps"
-    # Install macOS apps via cask
-    install_applications
-    # Post-installation vscode setup
-    e_header "Installing vscode extensions"
-    install_vscode_extensions
-    symlink_vscode_settings "${DOTFILES_DIRECTORY}"
-    e_success "Done"
+  e_header "Installing macOS desktop apps"
+  # Install macOS apps via cask
+  install_applications
+  # Post-installation vscode setup
+  e_header "Installing vscode extensions"
+  install_vscode_extensions
+  symlink_vscode_settings "${DOTFILES_DIRECTORY}"
+  e_success "Done"
 else
-    printf "Skipped installing applications.\n"
+  printf "Skipped installing applications.\n"
 fi
 
 # Install and update packages
 if [[ $no_packages ]]; then
-    printf "Skipped package installations.\n"
+  printf "Skipped package installations.\n"
 else
-    printf "Updating packages...\n"
-    # Install Homebrew formulae
-    run_brew
+  printf "Updating packages...\n"
+  # Install Homebrew formulae
+  run_brew
 fi
 
 link() {
-    # Force create/replace the symlink.
-    ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+  # Force create/replace the symlink.
+  ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
 mirrorfiles() {
-    # Copy '.gitconfig'
-    # Any global git commands in `~/.bash_profile.local` will be written to
-    # `.gitconfig`. This prevents them being committed to the repository.
-    # rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig ${HOME}/.gitconfig
+  # Copy '.gitconfig'
+  # Any global git commands in `~/.bash_profile.local` will be written to
+  # `.gitconfig`. This prevents them being committed to the repository.
+  # rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig ${HOME}/.gitconfig
 
-    # Force remove the vim directory if it's already there
-    # if [ -e "${HOME}/.vim" ]; then
-        # rm -rf "${HOME}/.vim"
-    # fi
+  # Force remove the vim directory if it's already there
+  # if [ -e "${HOME}/.vim" ]; then
+      # rm -rf "${HOME}/.vim"
+  # fi
 
-    # Create the necessary symbolic links between the `.dotfiles` and `HOME`
-    # directory. The `bash_profile` sources other files directory from the
-    # `.dotfiles` repository.
-    link "shell/bashrc"       ".bashrc"
-    link "shell/bash_profile" ".bash_profile"
-    link "vim/vimrc"          ".vimrc"
-    link "git/gitconfig"      ".gitconfig"
-    link "hammerspoon"        ".hammerspoon"
+  # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+  # directory. The `bash_profile` sources other files directory from the
+  # `.dotfiles` repository.
+  link "shell/bashrc"       ".bashrc"
+  link "shell/bash_profile" ".bash_profile"
+  link "vim/vimrc"          ".vimrc"
+  link "git/gitconfig"      ".gitconfig"
+  link "hammerspoon"        ".hammerspoon"
 
-    e_success "Dotfiles update complete!"
+  e_success "Dotfiles update complete!"
 }
 
 # Ask before potentially overwritting files
 seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
-    mirrorfiles
-    source "${HOME}/.bash_profile"
+  mirrorfiles
+  source "${HOME}/.bash_profile"
 else
-    printf "Skipped symlinking dotfiles to root.\n"
+  printf "Skipped symlinking dotfiles to root.\n"
 fi
 
 # Ask before potentially overwritting macOS defaults
 seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
-    bash ./macos/macosdefaults
-    e_success "macOS settings updated! You may need to restart."
+  bash ./macos/macosdefaults
+  e_success "macOS settings updated! You may need to restart."
 else
-    printf "Skipped macOS settings update.\n"
+  printf "Skipped macOS settings update.\n"
 fi
 

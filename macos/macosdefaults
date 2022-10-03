@@ -164,11 +164,11 @@ defaults write com.google.chrome NSNavLastRootDirectory -string "$HOME/Desktop"
 ###############################################################################
 
 for app in "Activity Monitor" \
-        "Dock" \
-        "Finder" \
-        "Photos" \
-        "SystemUIServer" \
-        "Flux"; do
-        killall "${app}" &> /dev/null
+  "Dock" \
+  "Finder" \
+  "Photos" \
+  "SystemUIServer" \
+  "Flux"; do
+  killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
