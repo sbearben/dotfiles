@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#
 # Install mac applications
 
 function _install() {
