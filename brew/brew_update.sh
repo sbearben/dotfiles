@@ -3,7 +3,7 @@
 brew update
 
 OUTDATED_THRESHOLD=10
-BREW_UPDATE_LOG_FILE=.brew-update.log
+BREW_UPDATE_LOG_FILE=.brew_update.log
 num_outdated_formulae=$(brew outdated | wc -l | tr -d ' \t')
 
 if [[ ${num_outdated_formulae} -gt OUTDATED_THRESHOLD ]]; then
