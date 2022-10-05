@@ -33,7 +33,7 @@ function download_extensions_repo() {
     printf "$(tput setaf 7)Downloading dotfiles extensions: %s\033[m\n" "${remote_ext_repo}"
     mkdir "${local_ext_path}"
     # Get the tarball
-    curl -fsSLo "${HOME}"/dotfiles_exts.tar.gz ${remote_ext_tarball_path}
+    curl -fsSLo "${HOME}"/dotfiles_exts.tar.gz "${remote_ext_tarball_path}"
     # Extract to the dotfiles directory
     tar -zxf "${HOME}"/dotfiles_exts.tar.gz --strip-components 1 -C "${local_ext_path}"
     # Remove the tarball

@@ -73,7 +73,7 @@ function run_brew() {
       fi
     done
 
-    if [[ "$missing_formulae" ]]; then
+    if [[ "${missing_formulae[0]}" ]]; then
       # Convert the array of missing formula into a list of space-separate strings
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
