@@ -28,7 +28,6 @@ Options:
 | Option                | Description                                                        |
 | --------------------- | ------------------------------------------------------------------ |
 | `-h`, `--help`        | Help                                                               |
-| `-l`, `--list`        | List of additional applications to install                         |
 | `--no-packages`       | Suppress package updates                                           |
 | `--no-sync`           | Suppress pulling from the remote repository                        |
 | `--install-apps`      | Install macOS applications                                         |
