@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091
 
 # Source dotfile_env to set up variables needed for extensions.
 source "${HOME}/.dotfiles/dotfiles_env"
@@ -18,7 +19,7 @@ unset file;
 
 # dev and brew
 if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Android studio
 NDK_VERSION=21.4.7075529

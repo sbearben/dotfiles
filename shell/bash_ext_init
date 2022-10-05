@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091
 
 # Load bash extensions
 for bash_ext in {${EXT_BASH_PROFILE},${EXT_BASH_ALIAS},${EXT_BASH_FUNCS}}; do
