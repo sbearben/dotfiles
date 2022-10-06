@@ -40,7 +40,6 @@ no_packages=false
 no_sync=false
 install_apps=false
 extensions_repo_remote=
-extensions_repo_local="$DOTFILES_EXT_DIRECTORY"
 
 # Extract provided arguments.
 # Performing no validation of provided arguments. But providing `extensions-local`
@@ -56,15 +55,6 @@ while [[ $# -gt 0 ]]; do
         shift
       else
         e_error 'Option "--extensions-remote" requires a non-empty argument.'
-        exit 1
-      fi
-      ;;
-    --extensions-local)
-      if [ "$2" ]; then
-        extensions_repo_local=$2
-        shift
-      else
-        e_error 'Option "--extensions-local" requires a non-empty argument.'
         exit 1
       fi
       ;;
@@ -143,8 +133,7 @@ fi
 
 # Initializes and sets up provided extensions repo
 if [[ $extensions_repo_remote ]]; then
-  download_extensions_repo "$extensions_repo_remote" "$extensions_repo_local"
-  create_dotfiles_config "$extensions_repo_local"
+  download_extensions_repo "$extensions_repo_remote" "$DOTFILES_EXT_DIRECTORY"
 else
   printf "Skipped initializing extensions repo.\n"
 fi

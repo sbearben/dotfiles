@@ -43,6 +43,11 @@ function download_extensions_repo() {
 }
 
 #######################################
+# NOTE: This method is no longer needed, as
+#       have gotten rid need for config file.
+#       Only keeping this here to serve as
+#       another code example.
+#
 # Creates dotfiles config file.
 # Globals:
 #   DOTFILES_DIRECTORY
