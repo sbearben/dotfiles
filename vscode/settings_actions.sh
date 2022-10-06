@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091
 #
 # Actions for managing vscode settings.
 
 set -e
 
-DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+source "$DOTFILES_DIRECTORY/lib/utils"
+
 # target="$DOTFILES_DIRECTORY/vscode/merged.log"
 target="${HOME}/Library/Application Support/Code/User/settings.json"
-base="$DOTFILES_DIRECTORY/vscode/settings.json"
-ext="${HOME}/.dotfiles_exts/vscode_settings.json"
-
-source "$DOTFILES_DIRECTORY/lib/utils"
+base="${DOTFILES_DIRECTORY}/vscode/settings.json"
+ext="${DOTFILES_EXT_DIRECTORY}/vscode_settings.json"
 
 
 #######################################

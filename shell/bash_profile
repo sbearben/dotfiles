@@ -12,7 +12,7 @@ bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
 
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/.dotfiles/shell/{bash_prompt,bash_aliases,functions}; do
+for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,bash_aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -30,7 +30,7 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Add VSCode to path
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Jdk path - currently v.11
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
