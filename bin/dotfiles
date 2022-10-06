@@ -168,9 +168,9 @@ function link() {
 
 function mirrorfiles() {
   # Copy '.gitconfig'
-  # Any global git commands in `~/.bash_profile.local` will be written to
-  # `.gitconfig`. This prevents them being committed to the repository.
-  # rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig ${HOME}/.gitconfig
+  # The gitconfig file will extend the `gituser` file if available, or
+  # any gitconfig extension. This is loaded in `bash_ext_init`.
+  cp "${DOTFILES_DIRECTORY}/git/gitconfig" "${HOME}/.gitconfig"
 
   # Force remove the vim directory if it's already there
   # if [ -e "${HOME}/.vim" ]; then
@@ -183,7 +183,7 @@ function mirrorfiles() {
   link "shell/bashrc"       ".bashrc"
   link "shell/bash_profile" ".bash_profile"
   link "vim/vimrc"          ".vimrc"
-  link "git/gitconfig"      ".gitconfig"
+  # link "git/gitconfig"      ".gitconfig"
   link "hammerspoon"        ".hammerspoon"
 
   e_success "Dotfiles update complete!"

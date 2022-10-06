@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
+#
+# Entry point to initialize extensions for bash and git.
 
 # Load bash extensions
 for bash_ext in {${EXT_BASH_PROFILE},${EXT_BASH_ALIAS},${EXT_BASH_FUNCS}}; do
@@ -13,7 +15,5 @@ unset bash_ext;
 if [[ -r "$EXT_GITCONFIG" && -f "$EXT_GITCONFIG" ]]; then
 	git config --global include.path "$EXT_GITCONFIG"
 elif [[ -r "$DOTFILES_DIRECTORY"/git/gituser && -f "$DOTFILES_DIRECTORY"/git/gituser ]]; then
-	true
-	# Leave this out for now since it's already the default in `gitconfig`.
-	# git config --global include.path "$DOTFILES_DIRECTORY"/gituser
+	git config --global include.path "$DOTFILES_DIRECTORY"/git/gituser
 fi
