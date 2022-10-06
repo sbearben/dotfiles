@@ -53,7 +53,7 @@ function bundleid() {
 }
 
 # Base64 encode the provided string
-function b64e() {
+function e64() {
   if [ $# -eq 0 ]; then
 		echo "b64e requires an argument for the string to encode" && return 1
 	fi
@@ -61,7 +61,7 @@ function b64e() {
 }
 
 # Decode the provided base64 encoded string
-function b64d() {
+function d64() {
   if [ $# -eq 0 ]; then
 		echo "b64d requires an argument for the string to decode" && return 1
 	fi
