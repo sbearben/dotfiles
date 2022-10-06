@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# Checks how many outdated formulae there are, and runs `brew upgrade` if it's
+# greater than the treshold. Saves the run time in a log for later viewing. 
 
 brew update
 

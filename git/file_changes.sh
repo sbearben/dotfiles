@@ -5,6 +5,23 @@
 _ORIG_HEAD=$1
 _HEAD=$2
 
+#######################################
+# Given a git hook type and a filename, checks
+# if the file has changed. If so, executes a
+# provided command. This could be used to
+# execute a command if a file has changed after
+# a git pull, rebase, merge, etc.
+# Globals:
+#   _ORIG_HEAD
+#   _HEAD
+#   HEAD@{1}
+# Arguments:
+#   git hook_type
+#   file name
+#   command to execute
+# Outputs:
+#   The ouput of the evaluated command, or nothing.
+#######################################
 function check_for_changed_files() {
   local hook_type="$1"
   local file="$2"
