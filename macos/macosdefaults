@@ -110,7 +110,7 @@ defaults write com.apple.dock wvous-br-corner -int 1
 defaults write com.apple.dock wvous-br-modifier -int 1048576
 
 # Use F1, F2, etc. keys as standard function keys
-defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1"
+# defaults write "Apple Global Domain" "com.apple.keyboard.fnState" "1"
 
 # Add bluetooth icon to menu bar
 defaults write com.apple.systemuiserver menuExtras -array \
@@ -118,6 +118,9 @@ defaults write com.apple.systemuiserver menuExtras -array \
 
 # Make right-side of magic mouse be right-click
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse -string "TwoButton"
+
+# Show month and day in menu-bar clock as opposed to day of week
+defaults write com.apple.menuextra.clock "ShowDayOfWeek" -bool "false"
 
 ###############################################################################
 # Activity Monitor                                                            #
