@@ -27,7 +27,7 @@ ext="${DOTFILES_EXT_DIRECTORY}/vscode_settings.json"
 #######################################
 function create_extended_settings() {
   if [ -f "$ext" ]; then
-    merge_json <(strip_comments "$base")  "$ext"
+    merge_json <(strip_comments "$base") <(strip_comments "$ext")
   else
     cat "$base"
   fi
