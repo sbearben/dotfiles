@@ -32,7 +32,6 @@ Options:
 | `--no-sync`           | Suppress pulling from the remote repository                        |
 | `--install-apps`      | Install macOS applications                                         |
 | `--extensions-remote` | Link to github dotfiles extensions repo                            |
-| `--extensions-local`  | Location to install extensions repo (uses default if not provided) |
 
 ## Features
 

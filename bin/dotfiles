@@ -42,8 +42,7 @@ install_apps=false
 extensions_repo_remote=
 
 # Extract provided arguments.
-# Performing no validation of provided arguments. But providing `extensions-local`
-# witbout providing `extensions-remote` would be an invariant.
+# Performing no validation of provided arguments.
 while [[ $# -gt 0 ]]; do
   case $1 in
     --no-packages) no_packages=true ;;
