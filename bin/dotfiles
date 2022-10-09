@@ -133,6 +133,8 @@ fi
 # Initializes and sets up provided extensions repo
 if [[ $extensions_repo_remote ]]; then
   download_extensions_repo "$extensions_repo_remote" "$DOTFILES_EXT_DIRECTORY"
+  # Source `dotfiles_env` again since some env variables are conditional on existence of extension files
+  source ./dotfiles_env
 else
   printf "Skipped initializing extensions repo.\n"
 fi
