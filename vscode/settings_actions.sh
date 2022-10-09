@@ -62,6 +62,11 @@ function show_diff_with_current() {
 #######################################
 function install_vscode_settings() {
   e_header "Starting vscode settings installation"
+  if ! type_exists 'code'; then
+    e_error "VSCode appears to not be installed - exiting without installing vscode settings."
+    return 1
+  fi
+
   local source settings_diff
   source=$(create_extended_settings)
 
