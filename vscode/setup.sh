@@ -24,9 +24,15 @@ function install_vscode_extensions() {
     wingrunr21.vscode-ruby
     castwide.solargraph
   )
+  local installed_extensions
+  installed_extensions=$(code --list-extensions)
 
   for EXT in "${pkglist[@]}"; do
-    code --install-extension "$EXT"
+    if echo "$installed_extensions" | grep -q "$EXT"; then
+      echo "Extension '$EXT' is already installed."
+    else
+      code --install-extension "$EXT"
+    fi
   done
 }
 
