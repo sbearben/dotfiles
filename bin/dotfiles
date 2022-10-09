@@ -144,10 +144,9 @@ if [[ $install_apps ]]; then
   e_header "Installing macOS desktop apps"
   # Install macOS apps via cask
   install_applications
-  # Post-installation vscode setup
+  # Post-installation, install vscode extensions
   e_header "Installing vscode extensions"
   install_vscode_extensions
-  ./vscode/settings_actions.sh install
   e_success "Done"
 else
   printf "Skipped installing applications.\n"
@@ -187,6 +186,9 @@ function mirrorfiles() {
   # link "git/gitconfig"      ".gitconfig"
   link "hammerspoon"        ".hammerspoon"
 
+  # Install vscode settings.json
+  ./vscode/settings_actions.sh install
+
   e_success "Dotfiles update complete!"
 }
 
@@ -204,7 +206,7 @@ fi
 seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
-  bash ./macos/macosdefaults
+  ./macos/macosdefaults
   e_success "macOS settings updated! You may need to restart."
 else
   printf "Skipped macOS settings update.\n"
