@@ -180,11 +180,7 @@ function mirrorfiles() {
   link "shell/bashrc"       ".bashrc"
   link "shell/bash_profile" ".bash_profile"
   link "vim/vimrc"          ".vimrc"
-  # link "git/gitconfig"      ".gitconfig"
   link "hammerspoon"        ".hammerspoon"
-
-  # Install vscode settings.json
-  ./vscode/settings_actions.sh install
 
   e_success "Dotfiles update complete!"
 }
@@ -198,6 +194,9 @@ if is_confirmed; then
 else
   printf "Skipped symlinking dotfiles to root.\n"
 fi
+
+# Install vscode settings.json
+./vscode/settings_actions.sh install
 
 # Ask before potentially overwritting macOS defaults
 seek_confirmation "Warning: This step may modify your macOS system defaults."
