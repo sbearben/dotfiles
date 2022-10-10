@@ -7,7 +7,7 @@ Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME and `.vim` directories.
 
 ```bash
-$ bash -c "$(curl -fsSL raw.github.com/sbearben/dotfiles/main/bin/dotfiles)" bash install-all
+bash -c "$(curl -fsSL raw.github.com/sbearben/dotfiles/main/bin/dotfiles)" bash install-all
 ```
 
 ## How to update
@@ -71,10 +71,10 @@ dotfiles download-extensions <string>
 
 Given a url to an extensions repo, downloads it and copies to `~/.dotfiles_exts`.
 
-#### dotfiles remirror
+#### dotfiles mirror
 
 ```bash
-dotfiles remirror
+dotfiles mirror
 ```
 
 Links/copies dotfiles including vscode settings.

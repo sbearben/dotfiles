@@ -258,7 +258,7 @@ case $1 in
     link_dotfiles
     ;;
   download-extensions) download_extensions "$2" ;;
-  remirror) link_dotfiles ;;
+  mirror) link_dotfiles ;;
   macos) run_macos_action "$2" ;;
   vscode) run_vscode_action "$2" ;;
   *)
