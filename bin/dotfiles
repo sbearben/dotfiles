@@ -113,7 +113,6 @@ if ! is_git_repo; then
   git remote add origin ${DOTFILES_GIT_REMOTE}
   git fetch origin main
   # Reset the index and working tree to the fetched HEAD
-  # (submodules are cloned in the subsequent sync step)
   git reset --hard FETCH_HEAD
   # Remove any untracked files
   git clean -fd
@@ -126,8 +125,6 @@ else
   e_header "Syncing dotfiles..."
   # Pull down the latest changes
   git pull --rebase origin main
-  # Update submodules
-  git submodule update --recursive --init --quiet
 fi
 
 # Initializes and sets up provided extensions repo
