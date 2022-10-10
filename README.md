@@ -24,6 +24,20 @@ Run the dotfiles command:
 dotfiles update
 ```
 
+## Extensions
+
+Certain files can be extended using an extensions repo. The repo is expected to live locally at `~/.dotfiles_exts`, and supports the files listed below. In order to download an extensions repo, can use [`dotfiles download-extensions`](#dotfiles-download-extensions)
+
+The expected extension files in the repo are as follows (each is optional, only a partial set needs to be provided):
+
+- `bash_profile`
+- `bash_aliases`
+- `bash_functions`
+- `gitconfig`
+- `vscode_settings.json`
+
+**Note:** in order for any changes to `vscode_settings.json` to apply, will need to run [`dotfiles update`](#dotfiles-update) or [`dotfiles vscode setting-install`](#dotfiles-vscode-settings-install). Changes to any of the remaining files can be applied by restarting the terminal, or sourcing `~/.bash_profile`.
+
 ## Commands
 
 ### Core
