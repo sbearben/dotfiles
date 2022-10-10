@@ -36,17 +36,17 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
 fi
 
 # Initialize arguments
-no_packages=false
 no_sync=false
+no_packages=false
 install_apps=false
 extensions_repo_remote=
 
 # Extract provided arguments.
 # Performing no validation of provided arguments.
-while [[ $# -gt 0 ]]; do
+while (( "$#" )); do
   case $1 in
-    --no-packages) no_packages=true ;;
     --no-sync) no_sync=true ;;
+    --no-packages) no_packages=true ;;
     --install-apps) install_apps=true ;;
     --extensions-remote)
       if [ "$2" ]; then
