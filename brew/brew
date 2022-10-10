@@ -9,10 +9,9 @@ function after_installing_formulae() {
   local -a arr=("$@")
   for formulae in "${arr[@]}"; do
     # Make sure formulae was actually installed in the previous step
-    if formula_exists "$formulae"; then
-      if [ "$formulae" = "$OPEN_JDK_11" ]; then
-        # needs sudo?
-        ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+    if formula_exists "$formulae" >/dev/null; then
+      if [[ "$formulae" = "$OPEN_JDK_11" ]]; then
+        sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
       fi
     fi
   done
@@ -37,7 +36,7 @@ function run_brew() {
     local -a desired_formulae=(
       'ack'
       'apktool'
-      'bash-completion'
+      'bash-completion@2'
       # 'bundle'
       'cheatsheet'
       # Ruby environment tool

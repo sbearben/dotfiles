@@ -8,7 +8,8 @@ set -e
 source "$DOTFILES_DIRECTORY/lib/utils"
 
 # target="$DOTFILES_DIRECTORY/vscode/merged.log"
-target="${HOME}/Library/Application Support/Code/User/settings.json"
+target_dir="${HOME}/Library/Application Support/Code/User"
+target="${target_dir}/settings.json"
 base="${DOTFILES_DIRECTORY}/vscode/settings.json"
 ext="${DOTFILES_EXT_DIRECTORY}/vscode_settings.json"
 
@@ -83,6 +84,7 @@ function install_vscode_settings() {
 
   if is_confirmed; then
     # Install final settings.json -> exit if success
+    mkdir -p "$target_dir"
     cp <(echo "$source") "$target"
     [[ $? ]] && e_success "Installed vscode settings successfully." && return 0
     

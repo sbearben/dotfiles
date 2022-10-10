@@ -46,7 +46,11 @@ function e_warning() {
 function seek_confirmation() {
   printf "\n"
   e_warning "$@"
-  read -rp "Continue? (y/n) " -n 1
+  if [[ "$CI" == true ]]; then
+    read -rp "Continue? (y/n) " -n 1 < <(yes)
+  else
+    read -rp "Continue? (y/n) " -n 1
+  fi
   printf "\n"
 }
 
@@ -75,7 +79,7 @@ function type_exists() {
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 function formula_exists() {
-  if brew list "$1" >/dev/null; then
+  if brew list "$1" >/dev/null 2>&1; then
     printf "%s already installed.\n" "$1"
     return 0
   fi

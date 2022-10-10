@@ -1,0 +1,16 @@
+on: [push]
+name: Dotfiles tests
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: install-all
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run dotfiles installation
+        shell: bash
+        run: ./bin/dotfiles install-all --no-sync
+        env:
+          TERM: dumb

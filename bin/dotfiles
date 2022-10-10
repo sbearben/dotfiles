@@ -4,7 +4,8 @@
 set -e
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/sbearben/dotfiles/tarball/main"
+DOTFILES_TARBALL_BRANCH=${GITHUB_REF_NAME:-"main"}
+DOTFILES_TARBALL_PATH="https://github.com/sbearben/dotfiles/tarball/$DOTFILES_TARBALL_BRANCH"
 DOTFILES_GIT_REMOTE="https://github.com/sbearben/dotfiles.git"
 
 # If missing, download and extract the dotfiles repository
@@ -12,7 +13,7 @@ if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
   printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
   mkdir "${DOTFILES_DIRECTORY}"
   # Get the tarball
-  curl -fsSLo "${HOME}"/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+  curl -fsSLo "${HOME}"/dotfiles.tar.gz "${DOTFILES_TARBALL_PATH}"
   # Extract to the dotfiles directory
   tar -zxf "${HOME}"/dotfiles.tar.gz --strip-components 1 -C "${DOTFILES_DIRECTORY}"
   # Remove the tarball
@@ -70,14 +71,17 @@ if [[ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 5 ]]; then
   if ! grep -qF "${HOMEBREW_PREFIX}"/bin/bash "/etc/shells"; then
     echo "${HOMEBREW_PREFIX}"/bin/bash | sudo tee -a /etc/shells
   fi
-  chsh -s "${HOMEBREW_PREFIX}"/bin/bash
+  
+  sudo chsh -s "${HOMEBREW_PREFIX}"/bin/bash
   e_success "Default shell is now bash v5."
-  printf "Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
-  exit 1
+  if [[ "$CI" == false ]]; then
+    printf "Dotfile setup must be re-run with: bash ~/.dotfiles/bin/dotfiles\n"
+    exit 1
+  fi
 fi
 
 # Initialize the git repository if it's missing
-if ! is_git_repo; then
+if ! is_git_repo && [[ "$CI" == false ]]; then
   e_header "Initializing git repository..."
   git init
   git remote add origin ${DOTFILES_GIT_REMOTE}
@@ -135,7 +139,7 @@ function link_dotfiles() {
     link "vim/vimrc"          ".vimrc"
     link "hammerspoon"        ".hammerspoon"
     e_success "Dotfiles update complete!"
-    source "${HOME}/.bash_profile"
+    source "${HOME}/.bashrc"
   else
     printf "Skipped symlinking dotfiles to root.\n"
   fi
@@ -204,7 +208,7 @@ function run_dotfiles() {
   done
 
   # Conditionally sync with the remote repository
-  if [[ $no_sync ]]; then
+  if [[ "$no_sync" == true ]]; then
     printf "Skipped dotfiles sync.\n"
   else
     sync_dotfiles
@@ -218,14 +222,14 @@ function run_dotfiles() {
   fi
 
   # First insall applications if desired
-  if [[ $install_apps ]]; then
+  if [[ "$install_apps" == true ]]; then
     install_macos_apps
   else
     printf "Skipped installing applications.\n"
   fi
 
   # Install and update packages
-  if [[ $install_packages ]]; then
+  if [[ "$install_packages" == true ]]; then
     install_brew_packages
   else
     printf "Skipped package installations.\n"

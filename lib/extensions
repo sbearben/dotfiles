@@ -2,7 +2,6 @@
 # shellcheck disable=SC1090,SC1091
 
 source "${DOTFILES_DIRECTORY}/lib/utils"
-source "${DOTFILES_DIRECTORY}/dotfiles_env"
 
 #######################################
 # Downloads the remote extensons repo and creates the local directory.
