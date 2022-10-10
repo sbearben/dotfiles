@@ -29,7 +29,7 @@ function create_extended_settings() {
   if [ -f "$ext" ]; then
     merge_json <(strip_comments "$base") <(strip_comments "$ext")
   else
-    cat "$base"
+    jq . <(strip_comments "$base")
   fi
 }
 
