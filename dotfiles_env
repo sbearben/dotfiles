@@ -12,3 +12,5 @@ if [ -n "$DOTFILES_EXT_DIRECTORY" ]; then
   [ -f "${DOTFILES_EXT_DIRECTORY}/bash_functions" ] && export EXT_BASH_FUNCS="${DOTFILES_EXT_DIRECTORY}/bash_functions"
   [ -f "${DOTFILES_EXT_DIRECTORY}/vscode_settings_json" ] && export EXT_VSCODE_SETTINGS="${DOTFILES_EXT_DIRECTORY}/vscode_settings.json"
 fi
+
+return 0
