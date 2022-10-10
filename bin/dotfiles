@@ -35,36 +35,6 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
   exit
 fi
 
-# Initialize arguments
-no_sync=false
-no_packages=false
-install_apps=false
-extensions_repo_remote=
-
-# Extract provided arguments.
-# Performing no validation of provided arguments.
-while (( "$#" )); do
-  case $1 in
-    --no-sync) no_sync=true ;;
-    --no-packages) no_packages=true ;;
-    --install-apps) install_apps=true ;;
-    --extensions-remote)
-      if [ "$2" ]; then
-        extensions_repo_remote=$2
-        shift
-      else
-        e_error 'Option "--extensions-remote" requires a non-empty argument.'
-        exit 1
-      fi
-      ;;
-    --*|-*)
-      e_error "Error: invalid option $1"
-      exit 1
-      ;;
-  esac
-  shift
-done
-
 # Before relying on Homebrew, check that packages can be compiled
 if ! type_exists 'gcc'; then
   e_error "The XCode Command Line Tools must be installed first."
@@ -118,26 +88,19 @@ if ! is_git_repo; then
   git clean -fd
 fi
 
-# Conditionally sync with the remote repository
-if [[ $no_sync ]]; then
-  printf "Skipped dotfiles sync.\n"
-else
+function sync_dotfiles() {
   e_header "Syncing dotfiles..."
   # Pull down the latest changes
   git pull --rebase origin main
-fi
+}
 
-# Initializes and sets up provided extensions repo
-if [[ $extensions_repo_remote ]]; then
-  download_extensions_repo "$extensions_repo_remote" "$DOTFILES_EXT_DIRECTORY"
-  # Source `dotfiles_env` again since some env variables are conditional on existence of extension files
-  source ./dotfiles_env
-else
-  printf "Skipped initializing extensions repo.\n"
-fi
+function install_brew_packages() {
+  printf "Updating packages...\n"
+  # Install Homebrew formulae
+  run_brew
+}
 
-# First insall applications if desired
-if [[ $install_apps ]]; then
+function install_macos_apps() {
   e_header "Installing macOS desktop apps"
   # Install macOS apps via cask
   install_applications
@@ -145,66 +108,161 @@ if [[ $install_apps ]]; then
   e_header "Installing vscode extensions"
   install_vscode_extensions
   e_success "Done"
-else
-  printf "Skipped installing applications.\n"
-fi
+}
 
-# Install and update packages
-if [[ $no_packages ]]; then
-  printf "Skipped package installations.\n"
-else
-  printf "Updating packages...\n"
-  # Install Homebrew formulae
-  run_brew
-fi
+function download_extensions() {
+  download_extensions_repo "$1" "$DOTFILES_EXT_DIRECTORY"
+  # Source `dotfiles_env` again since some env variables are conditional on existence of extension files
+  source ./dotfiles_env
+}
 
 function link() {
   # Force create/replace the symlink.
   ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
-function mirrorfiles() {
-  # Copy '.gitconfig'
-  # The gitconfig file will extend the `gituser` file if available, or
-  # any gitconfig extension. This is loaded in `bash_ext_init`.
-  cp "${DOTFILES_DIRECTORY}/git/gitconfig" "${HOME}/.gitconfig"
+# symlink/copy dotfiles and vscode settings
+function link_dotfiles() {
+  # Ask before potentially overwritting files
+  seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
-  # Force remove the vim directory if it's already there
-  # if [ -e "${HOME}/.vim" ]; then
-      # rm -rf "${HOME}/.vim"
-  # fi
+  if is_confirmed; then
+    # Copy '.gitconfig' - the gitconfig file will extend the `gituser` file if 
+    # available, or any gitconfig extension. This is loaded in `bash_ext_init`.
+    cp "${DOTFILES_DIRECTORY}/git/gitconfig" "${HOME}/.gitconfig"
+    link "shell/bashrc"       ".bashrc"
+    link "shell/bash_profile" ".bash_profile"
+    link "vim/vimrc"          ".vimrc"
+    link "hammerspoon"        ".hammerspoon"
+    e_success "Dotfiles update complete!"
+    source "${HOME}/.bash_profile"
+  else
+    printf "Skipped symlinking dotfiles to root.\n"
+  fi
 
-  # Create the necessary symbolic links between the `.dotfiles` and `HOME`
-  # directory. The `bash_profile` sources other files directory from the
-  # `.dotfiles` repository.
-  link "shell/bashrc"       ".bashrc"
-  link "shell/bash_profile" ".bash_profile"
-  link "vim/vimrc"          ".vimrc"
-  link "hammerspoon"        ".hammerspoon"
-
-  e_success "Dotfiles update complete!"
+  # Install vscode settings.json
+  ./vscode/settings_actions.sh install
 }
 
-# Ask before potentially overwritting files
-seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+function run_macos_action() {
+  local action="$1"
+  case $action in
+    install-apps) install_macos_apps ;;
+    apply-defaults) ./macos/macosdefaults ;;
+    configure-dock) ./macos/dock.sh ;;
+    *)
+      e_error "Error: invalid macos action $1"
+      exit 1
+      ;;
+  esac
+}
 
-if is_confirmed; then
-  mirrorfiles
-  source "${HOME}/.bash_profile"
-else
-  printf "Skipped symlinking dotfiles to root.\n"
-fi
+function run_vscode_action() {
+  local action="$1"
+  case $action in
+    settings-*)
+      # Extract string from $action after the right-most '-'
+      local vscode_action=${action##*-} 
+      ./vscode/settings_actions.sh "$vscode_action"
+      ;;
+    *)
+      e_error "Error: invalid vscode action $1"
+      exit 1
+      ;;
+  esac
+}
 
-# Install vscode settings.json
-./vscode/settings_actions.sh install
+function run_dotfiles() {
+  # Initialize arguments
+  local no_sync=false
+  local install_packages=false
+  local install_apps=false
+  local extensions_repo_remote
 
-# Ask before potentially overwritting macOS defaults
-seek_confirmation "Warning: This step may modify your macOS system defaults."
+  # Extract provided arguments.
+  # Performing no validation of provided arguments.
+  while (( "$#" )); do
+    case $1 in
+      --no-sync) no_sync=true ;;
+      --install-packages) install_packages=true ;;
+      --install-apps) install_apps=true ;;
+      --extensions-remote)
+        if [ "$2" ]; then
+          extensions_repo_remote=$2
+          shift
+        else
+          e_error 'Option "--extensions-remote" requires a non-empty argument.'
+          exit 1
+        fi
+        ;;
+      --*|-*)
+        e_error "Error: invalid option $1"
+        exit 1
+        ;;
+    esac
+    shift
+  done
 
-if is_confirmed; then
-  ./macos/macosdefaults
-  e_success "macOS settings updated! You may need to restart."
-else
-  printf "Skipped macOS settings update.\n"
-fi
+  # Conditionally sync with the remote repository
+  if [[ $no_sync ]]; then
+    printf "Skipped dotfiles sync.\n"
+  else
+    sync_dotfiles
+  fi
 
+  # Initializes and sets up provided extensions repo
+  if [[ $extensions_repo_remote ]]; then
+    download_extensions "$extensions_repo_remote"
+  else
+    printf "Skipped initializing extensions repo.\n"
+  fi
+
+  # First insall applications if desired
+  if [[ $install_apps ]]; then
+    install_macos_apps
+  else
+    printf "Skipped installing applications.\n"
+  fi
+
+  # Install and update packages
+  if [[ $install_packages ]]; then
+    install_brew_packages
+  else
+    printf "Skipped package installations.\n"
+  fi
+
+  link_dotfiles
+
+  # Ask before potentially overwritting macOS defaults
+  seek_confirmation "Warning: This step may modify your macOS system defaults."
+  if is_confirmed; then
+    bash ./macos/macosdefaults
+    e_success "macOS settings updated! You may need to restart."
+  else
+    printf "Skipped macOS settings update.\n"
+  fi
+}
+
+case $1 in
+  install-all)
+    shift
+    run_dotfiles --install-packages --install-apps "$@"
+    ;;
+  install) 
+    shift
+    run_dotfiles "$@"
+    ;;
+  update)
+    sync_dotfiles
+    install_brew_packages
+    link_dotfiles
+    ;;
+  download-extensions) download_extensions "$2" ;;
+  remirror) link_dotfiles ;;
+  macos) run_macos_action "$2" ;;
+  vscode) run_vscode_action "$2" ;;
+  *)
+    e_error "Error: invalid dotfiles action $1"
+    exit 1
+    ;;
+esac

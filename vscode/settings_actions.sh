@@ -52,7 +52,7 @@ function show_diff_with_current() {
 #######################################
 # Given the base dotfiles settings json, and 
 # any potential extension settings, will create
-# the final settings file and intall it.
+# the final settings file and install it.
 # Globals:
 #   target
 # Arguments:
