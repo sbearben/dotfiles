@@ -2,20 +2,21 @@
 #
 # Install mac applications
 
-function _install() {
-  brew install --cask "$1" || true
-}
-
 function install_applications() {
-  _install android-studio
-  _install flipper
-  _install flux
-  _install google-chrome
-  # Tool for OS X automation: https://www.hammerspoon.org/
-  _install hammerspoon
-  # Open source bettersnaptool alternative
-  _install rectangle
-  _install slack
-  _install spotify
-  _install visual-studio-code
+  local -a apps=(
+    'android-studio'
+    'flipper'
+    'flux'
+    'google-chrome'
+    'hammerspoon'
+    # Open source bettersnaptool alternative
+    'rectangle'
+    'slack'
+    'spotify'
+    'visual-studio-code'
+  )
+
+  for app in "${apps[@]}"; do
+    brew install --cask "$app" || true
+  done
 }
