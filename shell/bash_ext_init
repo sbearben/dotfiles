@@ -10,8 +10,6 @@ done;
 unset bash_ext;
 
 # Set gitconfig user extension (precedence to extensions repo vs `gituser`).
-# One issue with this is that it causes changes to the tracked `gitconfig`
-# file, unsure how to fix right now.
 if [[ -r "$EXT_GITCONFIG" && -f "$EXT_GITCONFIG" ]]; then
 	git config --global include.path "$EXT_GITCONFIG"
 elif [[ -r "$DOTFILES_DIRECTORY"/git/gituser && -f "$DOTFILES_DIRECTORY"/git/gituser ]]; then
