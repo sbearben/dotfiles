@@ -5,13 +5,13 @@
 
 # Load bash extensions
 for bash_ext in {${EXT_BASH_PROFILE},${EXT_BASH_ALIAS},${EXT_BASH_FUNCS}}; do
-	[[ -r "$bash_ext" && -f "$bash_ext" ]] && source "$bash_ext";
+  [[ -r "$bash_ext" ]] && source "$bash_ext";
 done;
 unset bash_ext;
 
 # Set gitconfig user extension (precedence to extensions repo vs `gituser`).
-if [[ -r "$EXT_GITCONFIG" && -f "$EXT_GITCONFIG" ]]; then
-	git config --global include.path "$EXT_GITCONFIG"
-elif [[ -r "$DOTFILES_DIRECTORY"/git/gituser && -f "$DOTFILES_DIRECTORY"/git/gituser ]]; then
-	git config --global include.path "$DOTFILES_DIRECTORY"/git/gituser
+if [[ -r "$EXT_GITCONFIG" ]]; then
+  git config --global include.path "$EXT_GITCONFIG"
+elif [[ -r "$DOTFILES_DIRECTORY"/git/gituser ]]; then
+  git config --global include.path "$DOTFILES_DIRECTORY"/git/gituser
 fi
