@@ -4,13 +4,14 @@
 export DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 export DOTFILES_EXT_DIRECTORY="${HOME}/.dotfiles_exts"
 
-# check if DOTFILES_EXT_DIRECTORY is set (or if it's a non-zero length string)
-if [ -n "$DOTFILES_EXT_DIRECTORY" ]; then
+# check if DOTFILES_EXT_DIRECTORY exists
+if [ -d "$DOTFILES_EXT_DIRECTORY" ]; then
   [ -f "${DOTFILES_EXT_DIRECTORY}/gitconfig" ] && export EXT_GITCONFIG="${DOTFILES_EXT_DIRECTORY}/gitconfig"
   [ -f "${DOTFILES_EXT_DIRECTORY}/bash_profile" ] && export EXT_BASH_PROFILE="${DOTFILES_EXT_DIRECTORY}/bash_profile"
   [ -f "${DOTFILES_EXT_DIRECTORY}/bash_aliases" ] && export EXT_BASH_ALIAS="${DOTFILES_EXT_DIRECTORY}/bash_aliases"
   [ -f "${DOTFILES_EXT_DIRECTORY}/bash_functions" ] && export EXT_BASH_FUNCS="${DOTFILES_EXT_DIRECTORY}/bash_functions"
   [ -f "${DOTFILES_EXT_DIRECTORY}/vscode_settings_json" ] && export EXT_VSCODE_SETTINGS="${DOTFILES_EXT_DIRECTORY}/vscode_settings.json"
+  [ -d "${DOTFILES_EXT_DIRECTORY}/completions" ] && export EXT_BASH_COMPLETIONS="${DOTFILES_EXT_DIRECTORY}/completions"
 fi
 
 return 0

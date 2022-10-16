@@ -7,3 +7,12 @@
 for COMPLETION in "${DOTFILES_DIRECTORY}/shell/completions/"*; do
   [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
 done
+
+if [ -n "$EXT_BASH_COMPLETIONS" ]; then
+  for COMPLETION in "${EXT_BASH_COMPLETIONS}/"*; do
+    [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+  done
+fi
+
+
+unset COMPLETION;
