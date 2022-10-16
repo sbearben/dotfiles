@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091
+#
+# This file is symlinked to ~/.bash_completion, which is s
+# ubsequently sourced by bash-completion@2.
+
+for COMPLETION in "${DOTFILES_DIRECTORY}/shell/completions/"*; do
+  [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+done
