@@ -150,3 +150,11 @@ dotfiles vscode settings-install
 ```
 
 Given the base dotfiles settings json, and any potential extension settings, will create the final settings file and install it.
+
+## Dependencies and order
+
+Below is a image of the current dependencies and order of sourced bash files. The blue boxes on the left are internal and have been included for completeness. The red boxes are extensions and order can matter there. In my own extensions usage, I require that extension completions be sourced before functions, as functions can depend on them. As a result this sourcing order needs to be maintained for now, less things silently break.
+
+Realistically this is probably overkill and would potentially be worth just delegating all of this to the user. In the end there's nothing stopping extensions from just sourcing everything in their `bash_profile`.
+
+<img src="./assets/2022-10-17%20-%20deps%20order.png" width="1500" />
