@@ -15,7 +15,7 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # Load the shell dotfiles, and then some:
-for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,bash_aliases,functions}; do
+for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,functions,bash_aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

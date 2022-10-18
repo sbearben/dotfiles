@@ -4,7 +4,7 @@
 # Entry point to initialize extensions for bash and git.
 
 # Load bash extensions
-for bash_ext in {${EXT_BASH_PROFILE},${EXT_BASH_ALIAS},${EXT_BASH_FUNCS}}; do
+for bash_ext in {$EXT_BASH_PROFILE,$EXT_BASH_FUNCS,$EXT_BASH_ALIAS}; do
   [[ -r "$bash_ext" ]] && source "$bash_ext";
 done;
 unset bash_ext;
