@@ -10,6 +10,9 @@ bind '"\t":menu-complete'
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
+# Use up/down arrow keys to "complete" current command from history
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 # Load the shell dotfiles, and then some:
 for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,bash_aliases,functions}; do
