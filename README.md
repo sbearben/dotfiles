@@ -158,3 +158,18 @@ Below is a image of the current dependencies and order of sourced bash files. Th
 Realistically this is probably overkill and would potentially be worth just delegating all of this to the user. In the end there's nothing stopping extensions from just sourcing everything in their `bash_profile`.
 
 <img src="./assets/2022-10-17%20-%20deps%20order.png" width="1500" />
+
+## Exposed global variables
+
+Just so I don't forget what to expect from these and their values. All viewable in `dotfiles_env`. All variables are always set, so when used will need to check if the referenced file/directory exists.
+
+| Variable                | Value                                              |
+| ------------------------| ---------------------------------------------------|
+| DOTFILES_DIRECTORY      | ~/.dotfiles                                        |
+| DOTFILES_EXT_DIRECTORY  | ~/.dotfiles_exts                                   |
+| EXT_GITCONFIG           | ${DOTFILES_EXT_DIRECTORY}/gitconfig                |
+| EXT_BASH_PROFILE        | ${DOTFILES_EXT_DIRECTORY}/bash_profile             |
+| EXT_BASH_ALIAS          | ${DOTFILES_EXT_DIRECTORY}/bash_aliases             |
+| EXT_BASH_FUNCS          | ${DOTFILES_EXT_DIRECTORY}/bash_functions           |
+| EXT_BASH_COMPLETIONS    | ${DOTFILES_EXT_DIRECTORY}/completions              |
+| EXT_VSCODE_SETTINGS     | ${DOTFILES_EXT_DIRECTORY}/vscode_settings          |
