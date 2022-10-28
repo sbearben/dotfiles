@@ -26,14 +26,19 @@ if [ ! "$(uname -s)" = 'Darwin' ]; then
 	fi
 fi
 
-# `o` with no arguments opens the current directory, otherwise opens the given
-# location
+# `o` with no arguments opens the current directory, otherwise opens the given location
 function o() {
 	if [ $# -eq 0 ]; then
 		open .;
 	else
 		open "$@";
 	fi;
+}
+
+# Pretty-print JSON files
+function json() {
+  [ -n "$1" ] || return
+  < "$1" jq .
 }
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
