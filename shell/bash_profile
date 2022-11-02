@@ -4,6 +4,9 @@
 # Source dotfile_env to set up variables needed for extensions.
 source "${HOME}/.dotfiles/dotfiles_env"
 
+# brew - only needed for M1 macs, and should be done early (finding commands depends on it)
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # check if this is an interactive shell
 echo "$-" | grep -q "i" && INTERACTIVE_BASH=1
 
@@ -23,7 +26,7 @@ HISTTIMEFORMAT="%F %T "
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
-if which bat >/dev/null; then
+if type bat >/dev/null; then
   export MANPAGER
   # Not sure why, but need to explicitly source functions here or they're not found when running 'man'
   MANPAGER="bash -c 'source ~/.dotfiles/shell/functions && col -bx | bat -l man -p --theme=\"\$(get_bat_theme)\"'"
@@ -34,9 +37,6 @@ for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,functions,bash_aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-# brew
-[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Android studio
 NDK_VERSION=21.4.7075529
