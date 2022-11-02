@@ -37,6 +37,7 @@ function run_brew() {
       'ack'
       'apktool'
       'bash-completion@2'
+      'bat'
       # 'bundle'
       'cheatsheet'
       # Ruby environment tool

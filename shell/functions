@@ -41,6 +41,17 @@ function json() {
   < "$1" jq .
 }
 
+# Used to get desired bat theme at runtime (since OS theme is dynamic)
+# - used in bash_profile, bash_aliases
+function get_bat_theme() {
+  defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo "Visual Studio Dark+" || echo "GitHub"
+}
+
+# Use bat to show git diff
+function batdiff() {
+    git diff --name-only --relative --diff-filter=d | xargs bat --diff --theme="$(get_bat_theme)"
+}
+
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is

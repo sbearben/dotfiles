@@ -6,6 +6,7 @@ alias dt="cd ~/Desktop"
 
 alias ls="ls -G"
 alias ll="ls -lG"
+alias ls@="ls -al@"
 alias gls="gls --group-directories-first --color --time-style='+%Y/%m/%d %H:%M:%S'"
 
 alias csh-bash="chsh -s /bin/bash"
@@ -15,6 +16,8 @@ alias csh-bash5='chsh -s "${HOMEBREW_PREFIX}"/bin/bash'
 alias ln-brew-jdk="ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
 
 # Apple extended-attributes
-alias ls@="ls -al@"
 alias clean-quarantine="xattr -dr com.apple.quarantine ."
 alias clean-all-xattr="xattr -c ."
+
+# Overrides
+alias cat="bat --style=plain --theme=\"\$(get_bat_theme)\""

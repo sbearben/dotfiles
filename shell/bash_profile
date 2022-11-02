@@ -23,6 +23,12 @@ HISTTIMEFORMAT="%F %T "
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
+if which bat >/dev/null; then
+  export MANPAGER
+  # Not sure why, but need to explicitly source functions here or they're not found when running 'man'
+  MANPAGER="bash -c 'source ~/.dotfiles/shell/functions && col -bx | bat -l man -p --theme=\"\$(get_bat_theme)\"'"
+fi
+
 # Load the shell dotfiles, and then some:
 for file in ${DOTFILES_DIRECTORY}/shell/{bash_prompt,functions,bash_aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
