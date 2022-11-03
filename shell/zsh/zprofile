@@ -1,0 +1,61 @@
+#!/bin/zsh
+
+source "${HOME}/.dotfiles/dotfiles_env"
+source "${DOTFILES_DIRECTORY}/shell/common/shprofile"
+source "${DOTFILES_DIRECTORY}/shell/zsh/zprompt"
+
+# history file
+export HISTFILE=~/.zsh_history
+# history format
+alias history="history -t '%F %T'" 
+# don't show duplicate history entires
+setopt hist_find_no_dups
+# remove unnecessary blanks from history
+setopt hist_reduce_blanks
+# share history between instances
+setopt share_history
+setopt extended_history
+
+# autocorrect command and parameter spelling
+setopt correct
+setopt correctall
+
+# completion initialization
+autoload -Uz compinit && compinit
+
+# expand parameters, commands and arithmetic in prompts
+setopt prompt_subst
+
+# impacts tab
+setopt bash_auto_list
+setopt complete_aliases
+# unsetopt ALWAYS_LAST_PROMP
+
+# case insensitive completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# style ZSH output
+zstyle ':completion:*:descriptions' format '%U%B%F{red}%d%f%b%u'
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
+
+# From https://apple.github.io/swift-argument-parser/documentation/argumentparser/installingcompletionscripts/
+# - put completions in ~/.zsh/completion directory
+# FPATH=(~/.zsh/completion $FPATH)
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+# colorful prompt with Git and Subversion branch
+autoload -U colors && colors
+
+# search through history with up and down arror
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# zsh-autosuggestions / zsh-syntax-highlighting
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

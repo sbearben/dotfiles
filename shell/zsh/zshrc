@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# always source zprofile regardless of whether this is/isn't a login shell
+source ~/.zprofile

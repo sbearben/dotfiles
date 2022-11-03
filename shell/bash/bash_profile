@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090,SC1091
+
+source "${HOME}/.dotfiles/dotfiles_env"
+source "${DOTFILES_DIRECTORY}/shell/common/shprofile"
+source "${DOTFILES_DIRECTORY}/shell/bash/bash_prompt"
+
+# check if this is an interactive shell
+echo "$-" | grep -q "i" && INTERACTIVE_BASH=1
+
+# only set key bindings on interactive shell
+if [ -n "$INTERACTIVE_BASH" ]; then
+  # Better bash completion exp: https://unix.stackexchange.com/a/527944
+  bind '"\t":menu-complete'
+  bind "set show-all-if-ambiguous on"
+  bind "set completion-ignore-case on"
+  bind "set menu-complete-display-prefix on"
+  # Use up/down arrow keys to "complete" current command from history
+  bind '"\e[A": history-search-backward'
+  bind '"\e[B": history-search-forward'
+fi
+
+HISTTIMEFORMAT="%F %T "
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# Add tab completion for many Bash commands: https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
+fi
+
+# Init bash dotfile extensions
+source "$DOTFILES_DIRECTORY"/shell/bash/bash_ext_init

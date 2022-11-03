@@ -42,7 +42,7 @@ function json() {
 }
 
 # Used to get desired bat theme at runtime (since OS theme is dynamic)
-# - used in bash_profile, bash_aliases
+# - used in shprofile, aliases
 function get_bat_theme() {
   defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo "Visual Studio Dark+" || echo "GitHub"
 }

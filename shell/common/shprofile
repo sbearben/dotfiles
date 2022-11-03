@@ -1,0 +1,43 @@
+#!/bin/sh
+# shellcheck disable=SC1090,SC1091
+
+# Shared history settings
+export HISTFILESIZE=2000
+export HISTSIZE=$HISTFILESIZE
+
+# brew - only needed for M1 macs, and should be done early (finding commands depends on it)
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if type bat >/dev/null; then
+  export MANPAGER
+  # Not sure why, but need to explicitly source functions here or they're not found when running 'man'
+  MANPAGER="bash -c 'source ~/.dotfiles/shell/common/functions && col -bx | bat -l man -p --theme=\"\$(get_bat_theme)\"'"
+fi
+
+# Load the shell dotfiles, and then some:
+for file in ${DOTFILES_DIRECTORY}/shell/common/{functions,aliases}; do
+	[ -f "$file" ] && . "$file";
+done;
+unset file;
+
+# Android studio
+NDK_VERSION=21.4.7075529
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export ANDROID_NDK="$ANDROID_HOME/ndk/$NDK_VERSION"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/tools/bin"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+# Add VSCode to path
+export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# Add dotfiles bin to path
+export PATH="${PATH}:${DOTFILES_DIRECTORY}/bin"
+
+# Jdk path - currently v.11
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+
+# Source chruby so it becomes source of truth for ruby version to use
+CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
+. "$CHRUBY_PATH"/chruby.sh
+. "$CHRUBY_PATH"/auto.sh
+

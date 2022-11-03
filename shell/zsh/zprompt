@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+# Some resources for zsh prompt:
+# - https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Visual-effects
+# - https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+
+function parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:(\1)/'
+}
+
+# Exit status icon
+PS1="%(?.%F{green}✔%f.%B%F{red}✘%f%b)"
+# 24-hour format time with seconds
+PS1+="%F{145}[%*]%f "
+# Current directory
+PS1+="%B%F{19}%~%f%b"
+PS1+='%B$(parse_git_branch)%b'$'\n'"$ "
+RPROMPT="%B%F{red}[zsk]%f%b"

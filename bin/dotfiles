@@ -134,11 +134,13 @@ function link_dotfiles() {
     # Copy '.gitconfig' - the gitconfig file will extend the `gituser` file if 
     # available, or any gitconfig extension. This is loaded in `bash_ext_init`.
     cp "${DOTFILES_DIRECTORY}/git/gitconfig" "${HOME}/.gitconfig"
-    link "shell/bashrc"          ".bashrc"
-    link "shell/bash_profile"    ".bash_profile"
-    link "shell/bash_completion" ".bash_completion"
-    link "vim/vimrc"             ".vimrc"
-    link "hammerspoon"           ".hammerspoon"
+    link "shell/bash/bashrc"          ".bashrc"
+    link "shell/bash/bash_profile"    ".bash_profile"
+    link "shell/bash/bash_completion" ".bash_completion"
+    link "shell/zsh/zshrc"            ".zshrc"
+    link "shell/zsh/zprofile"         ".zprofile"
+    link "vim/vimrc"                  ".vimrc"
+    link "hammerspoon"                ".hammerspoon"
     e_success "Dotfiles update complete!"
     source "${HOME}/.bashrc"
   else

@@ -69,6 +69,8 @@ function run_brew() {
       # Get password of the wifi you're on
       'wifi-password'
       'yarn'
+      'zsh-autosuggestions'
+      'zsh-syntax-highlighting'
     )
 
     # Syntax below expands an array to a list of its indices
