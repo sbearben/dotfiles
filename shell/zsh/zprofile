@@ -38,9 +38,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 zstyle ':completion:*:descriptions' format '%U%B%F{red}%d%f%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
-# From https://apple.github.io/swift-argument-parser/documentation/argumentparser/installingcompletionscripts/
-# - put completions in ~/.zsh/completion directory
-# FPATH=(~/.zsh/completion $FPATH)
+# dotfiles repo completions, and ext completions
+FPATH="${DOTFILES_DIRECTORY}/shell/common/completions:${EXT_COMPLETIONS}:${FPATH}"
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
