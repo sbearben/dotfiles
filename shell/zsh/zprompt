@@ -15,4 +15,4 @@ PS1+="%F{145}[%*]%f "
 # Current directory
 PS1+="%B%F{19}%~%f%b"
 PS1+='%B$(parse_git_branch)%b'$'\n'"$ "
-RPROMPT="%B%F{red}[zsk]%f%b"
+RPROMPT="%B%F{red}[zsh]%f%b"

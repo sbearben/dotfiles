@@ -35,8 +35,8 @@ The expected directory structure of the extensions repo is follows (each file an
 ├── completions/
 │   ├── example_completion1
 │   └── example_completion2
-├── bash_aliases
-├── bash_functions
+├── aliases
+├── functions
 ├── bash_profile
 ├── gitconfig
 └── vscode_settings.json
