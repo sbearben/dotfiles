@@ -122,7 +122,7 @@ function download_extensions() {
 
 function link() {
   # Force create/replace the symlink.
-  ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+  ln -snf "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
 # symlink/copy dotfiles and vscode settings
