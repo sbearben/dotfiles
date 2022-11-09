@@ -36,5 +36,8 @@ if type brew &>/dev/null; then
   fi
 fi
 
+# enable mcfly (if installed)
+type mcfly &>/dev/null && eval "$(mcfly init bash)"
+
 # Init bash dotfile extensions
 source "$DOTFILES_DIRECTORY"/shell/bash/bash_ext_init

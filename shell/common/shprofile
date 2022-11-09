@@ -36,6 +36,17 @@ export PATH="${PATH}:${DOTFILES_DIRECTORY}/bin"
 # Jdk path - currently v.11
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 
+if type mcfly >/dev/null; then
+  export MCFLY_KEY_SCHEME=vim
+  export MCFLY_RESULTS=10000
+  export MCFLY_HISTORY_LIMIT
+  if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" != "Dark" ]; then
+    export MCFLY_LIGHT=TRUE
+  else
+    export MCFLY_LIGHT=FALSE
+  fi
+fi
+
 # Source chruby so it becomes source of truth for ruby version to use
 CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
 . "$CHRUBY_PATH"/chruby.sh

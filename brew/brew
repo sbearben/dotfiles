@@ -55,9 +55,10 @@ function run_brew() {
       'imagemagick'
       # Command line tool for processing json
       'jq'
-      "$OPEN_JDK_11"
+      "mcfly"
       'node'
       'open-completion'
+      "$OPEN_JDK_11"
       # Install different versions of ruby
       'ruby-install'
       'scrcpy'
@@ -86,6 +87,9 @@ function run_brew() {
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
       e_header "Installing missing Homebrew formulae..."
+      # Taps for formulae
+
+
       # Install all missing formulae
       # shellcheck disable=SC2086
       brew install $list_formulae
