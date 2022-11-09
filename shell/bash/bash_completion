@@ -4,12 +4,12 @@
 # This file is symlinked to ~/.bash_completion, which is s
 # ubsequently sourced by bash-completion@2.
 
-for COMPLETION in "${DOTFILES_DIRECTORY}/shell/bash/completions/"*; do
+for COMPLETION in "${DOTFILES_DIRECTORY}/shell/common/completions/"*; do
   [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
 done
 
-if [ -d "$EXT_BASH_COMPLETIONS" ]; then
-  for COMPLETION in "${EXT_BASH_COMPLETIONS}/"*; do
+if [ -d "$EXT_COMPLETIONS" ]; then
+  for COMPLETION in "${EXT_COMPLETIONS}/"*; do
     [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
   done
 fi

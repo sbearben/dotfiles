@@ -169,7 +169,7 @@ Just so I don't forget what to expect from these and their values. All viewable 
 | DOTFILES_EXT_DIRECTORY  | ~/.dotfiles_exts                                   |
 | EXT_GITCONFIG           | ${DOTFILES_EXT_DIRECTORY}/gitconfig                |
 | EXT_BASH_PROFILE        | ${DOTFILES_EXT_DIRECTORY}/bash_profile             |
-| EXT_BASH_ALIAS          | ${DOTFILES_EXT_DIRECTORY}/bash_aliases             |
-| EXT_BASH_FUNCS          | ${DOTFILES_EXT_DIRECTORY}/bash_functions           |
-| EXT_BASH_COMPLETIONS    | ${DOTFILES_EXT_DIRECTORY}/completions              |
+| EXT_ALIASES             | ${DOTFILES_EXT_DIRECTORY}/aliases                  |
+| EXT_FUNCS               | ${DOTFILES_EXT_DIRECTORY}/functions                |
+| EXT_COMPLETIONS         | ${DOTFILES_EXT_DIRECTORY}/completions              |
 | EXT_VSCODE_SETTINGS     | ${DOTFILES_EXT_DIRECTORY}/vscode_settings          |
