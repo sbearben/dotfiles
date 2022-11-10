@@ -43,7 +43,7 @@ The expected directory structure of the extensions repo is follows (each file an
 └── vscode_settings.json
 ```
 
-**Note:** in order for any changes to `vscode_settings.json` to apply, will need to run [`dotfiles update`](#dotfiles-update) or [`dotfiles vscode setting-install`](#dotfiles-vscode-settings-install). Changes to any of the remaining files can be applied by restarting the terminal, or sourcing `~/.bash_profile`.
+**Note:** in order for any changes to `vscode_settings.json` to apply, will need to run [`dotfiles update`](#dotfiles-update) or [`dotfiles vscode setting-install`](#dotfiles-vscode-settings-install). Changes to any of the remaining files can be applied by restarting the terminal, or sourcing either `~/.bashrc` or `~/.zshrc`.
 
 ## Commands
 

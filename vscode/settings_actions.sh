@@ -86,13 +86,17 @@ function install_vscode_settings() {
     # Install final settings.json -> exit if success
     mkdir -p "$target_dir"
     cp <(echo "$source") "$target"
-    [[ $? ]] && e_success "Installed vscode settings successfully." && return 0
-    
-    e_error "Encountered error copying settings to destination."
+    if [[ $? ]]; then
+      e_success "Installed vscode settings successfully."
+      return 0
+    else
+      e_error "Encountered error copying settings to destination." 
+      return 1
+    fi
   fi
 
   e_warning "Finished without installing vscode settings."
-  return 1
+  return 0
 }
 
 # Run action based on provided argument

@@ -11,6 +11,7 @@ alias gls="gls --group-directories-first --color --time-style='+%Y/%m/%d %H:%M:%
 
 alias csh-bash="chsh -s /bin/bash"
 alias csh-bash5='chsh -s "${HOMEBREW_PREFIX}"/bin/bash'
+alias csh-zsh='chsh -s /bin/zsh'
 
 # Link the brew openjdk installation so system can find it
 alias ln-brew-jdk="ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
