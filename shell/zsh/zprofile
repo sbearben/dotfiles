@@ -56,6 +56,7 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 # zsh-autosuggestions / zsh-syntax-highlighting
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="(git commit -m *|git ci -m *)"
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
