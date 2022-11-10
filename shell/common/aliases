@@ -22,3 +22,5 @@ alias clean-all-xattr="xattr -c ."
 
 # Overrides
 alias cat="bat --style=plain --theme=\"\$(get_bat_theme)\""
+alias fzf="fzf --height=70% --layout=reverse --info=inline --border --margin=1 --padding=1"
+alias fzfprev="fzf --preview 'bat --style numbers,changes --color=always --line-range :250 {}'"

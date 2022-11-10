@@ -44,6 +44,7 @@ function run_brew() {
       'chruby'
       'docker-completion'
       'dockutil'
+      'fzf'
       'git'
       'git-delta'
       'git-extras'
