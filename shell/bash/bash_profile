@@ -40,4 +40,5 @@ fi
 type mcfly &>/dev/null && eval "$(mcfly init bash)"
 
 # Init bash dotfile extensions
-source "$DOTFILES_DIRECTORY"/shell/bash/bash_ext_init
+[[ -r "$EXT_BASH_PROFILE" ]] && source "$EXT_BASH_PROFILE";
+source "$DOTFILES_DIRECTORY"/shell/common/sh_ext_init

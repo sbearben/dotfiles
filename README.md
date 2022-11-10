@@ -38,6 +38,7 @@ The expected directory structure of the extensions repo is follows (each file an
 ├── aliases
 ├── functions
 ├── bash_profile
+├── zprofile
 ├── gitconfig
 └── vscode_settings.json
 ```
@@ -169,6 +170,7 @@ Just so I don't forget what to expect from these and their values. All viewable 
 | DOTFILES_EXT_DIRECTORY  | ~/.dotfiles_exts                                   |
 | EXT_GITCONFIG           | ${DOTFILES_EXT_DIRECTORY}/gitconfig                |
 | EXT_BASH_PROFILE        | ${DOTFILES_EXT_DIRECTORY}/bash_profile             |
+| EXT_ZPROFILE            | ${DOTFILES_EXT_DIRECTORY}/zprofile                 |
 | EXT_ALIASES             | ${DOTFILES_EXT_DIRECTORY}/aliases                  |
 | EXT_FUNCS               | ${DOTFILES_EXT_DIRECTORY}/functions                |
 | EXT_COMPLETIONS         | ${DOTFILES_EXT_DIRECTORY}/completions              |

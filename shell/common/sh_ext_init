@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 #
-# Entry point to initialize extensions for bash and git.
+# Entry point to initialize extensions for shell aliases/functions and git.
 
-# Load bash extensions
-for bash_ext in {$EXT_BASH_PROFILE,$EXT_FUNCS,$EXT_ALIASES}; do
-  [[ -r "$bash_ext" ]] && source "$bash_ext";
+# Load shell extensions
+for sh_ext in {$EXT_FUNCS,$EXT_ALIASES}; do
+  [[ -r "$sh_ext" ]] && source "$sh_ext";
 done;
-unset bash_ext;
+unset sh_ext;
 
 # Set gitconfig user extension (precedence to extensions repo vs `gituser`).
 if [[ -r "$EXT_GITCONFIG" ]]; then
