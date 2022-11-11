@@ -5,7 +5,7 @@
 # ubsequently sourced by bash-completion@2.
 
 
-for COMPLETION_DIRECTORY in {"${DOTFILES_DIRECTORY}/shell/common/completions/","$EXT_COMPLETIONS"}; do
+for COMPLETION_DIRECTORY in {"${DOTFILES_DIRECTORY}/shell/common/completions/","$EXT_BASH_COMPLETIONS"}; do
   if [ -d "$COMPLETION_DIRECTORY" ]; then
     for COMPLETION in "${COMPLETION_DIRECTORY}/"*; do
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"

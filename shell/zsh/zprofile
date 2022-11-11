@@ -22,6 +22,9 @@ setopt correctall
 
 # completion initialization
 autoload -Uz compinit && compinit
+# enable bash completion compatability, and source bash completion files
+autoload -Uz bashcompinit && bashcompinit
+source "$DOTFILES_DIRECTORY/shell/bash/bash_completion"
 
 # expand parameters, commands and arithmetic in prompts
 setopt prompt_subst
@@ -39,7 +42,7 @@ zstyle ':completion:*:descriptions' format '%U%B%F{red}%d%f%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 # dotfiles repo completions, and ext completions
-FPATH="${DOTFILES_DIRECTORY}/shell/common/completions:${EXT_COMPLETIONS}:${FPATH}"
+# FPATH="${DOTFILES_DIRECTORY}/shell/zsh/completions:${EXT_ZSH_COMPLETIONS}:${FPATH}"
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
@@ -65,4 +68,4 @@ type mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
 # Init zsh dotfile extensions
 [[ -r "$EXT_ZPROFILE" ]] && source "$EXT_ZPROFILE";
-source "$DOTFILES_DIRECTORY"/shell/common/sh_ext_init
+source "$DOTFILES_DIRECTORY/shell/common/sh_ext_init"

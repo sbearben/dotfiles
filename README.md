@@ -32,7 +32,7 @@ The expected directory structure of the extensions repo is follows (each file an
 
 ```tree
 .dotfiles_exts/
-├── completions/
+├── bash_completions/
 │   ├── example_completion1
 │   └── example_completion2
 ├── aliases
@@ -173,5 +173,5 @@ Just so I don't forget what to expect from these and their values. All viewable 
 | EXT_ZPROFILE            | ${DOTFILES_EXT_DIRECTORY}/zprofile                 |
 | EXT_ALIASES             | ${DOTFILES_EXT_DIRECTORY}/aliases                  |
 | EXT_FUNCS               | ${DOTFILES_EXT_DIRECTORY}/functions                |
-| EXT_COMPLETIONS         | ${DOTFILES_EXT_DIRECTORY}/completions              |
+| EXT_BASH_COMPLETIONS    | ${DOTFILES_EXT_DIRECTORY}/bash_completions         |
 | EXT_VSCODE_SETTINGS     | ${DOTFILES_EXT_DIRECTORY}/vscode_settings          |
