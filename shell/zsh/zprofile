@@ -20,12 +20,6 @@ setopt extended_history
 setopt correct
 setopt correctall
 
-# completion initialization
-autoload -Uz compinit && compinit
-# enable bash completion compatability, and source bash completion files
-autoload -Uz bashcompinit && bashcompinit
-source "$DOTFILES_DIRECTORY/shell/bash/bash_completion"
-
 # expand parameters, commands and arithmetic in prompts
 setopt prompt_subst
 
@@ -46,6 +40,12 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
+
+# completion initialization
+autoload -Uz compinit && compinit
+# enable bash completion compatability, and source bash completion files
+autoload -Uz bashcompinit && bashcompinit
+source "$DOTFILES_DIRECTORY/shell/bash/bash_completion"
 
 # colorful prompt with Git and Subversion branch
 autoload -U colors && colors
