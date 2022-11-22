@@ -20,6 +20,7 @@
 	clean-all = "clean -fd"
 	dlb = branch -D @{-1}
   adne = "commit --amend --no-edit"
+	rb = rebase
 	rc = "rebase --continue"
 	ra = "rebase --abort"
 	# Actions
