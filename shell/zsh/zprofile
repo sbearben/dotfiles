@@ -16,9 +16,9 @@ setopt hist_reduce_blanks
 setopt share_history
 setopt extended_history
 
-# autocorrect command and parameter spelling
+# autocorrect command spelling
 setopt correct
-setopt correctall
+# setopt correctall
 
 # expand parameters, commands and arithmetic in prompts
 setopt prompt_subst
