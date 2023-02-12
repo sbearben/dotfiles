@@ -34,7 +34,10 @@ export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app
 export PATH="${PATH}:${DOTFILES_DIRECTORY}/bin"
 
 # Jdk path - currently v.11
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+if type /usr/libexec/java_home >/dev/null; then
+  export JAVA_HOME
+  JAVA_HOME=$(/usr/libexec/java_home -v 11)
+fi
 
 if type mcfly >/dev/null; then
   export MCFLY_RESULTS=20
@@ -44,8 +47,9 @@ if type mcfly >/dev/null; then
   fi
 fi
 
-# Source chruby so it becomes source of truth for ruby version to use
-CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
-. "$CHRUBY_PATH"/chruby.sh
-. "$CHRUBY_PATH"/auto.sh
-
+if type chruby >/dev/null; then
+  # Source chruby so it becomes source of truth for ruby version to use
+  CHRUBY_PATH="$(brew --prefix)/opt/chruby/share/chruby"
+  . "$CHRUBY_PATH"/chruby.sh
+  . "$CHRUBY_PATH"/auto.sh
+fi

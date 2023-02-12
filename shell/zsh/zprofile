@@ -4,6 +4,8 @@ source "${HOME}/.dotfiles/dotfiles_env"
 source "${DOTFILES_DIRECTORY}/shell/common/shprofile"
 source "${DOTFILES_DIRECTORY}/shell/zsh/zprompt"
 
+HOMEBREW_PREFIX="$(brew --prefix)"
+
 # history file
 export HISTFILE=~/.zsh_history
 # history format
@@ -38,7 +40,7 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 # dotfiles repo completions, and ext completions
 # FPATH="${DOTFILES_DIRECTORY}/shell/zsh/completions:${EXT_ZSH_COMPLETIONS}:${FPATH}"
 if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 fi
 
 # completion initialization
@@ -60,8 +62,12 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 # zsh-autosuggestions / zsh-syntax-highlighting
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="(git commit -m *|git ci -m *)"
-source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -r "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+if [[ -r "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
 
 # enable mcfly (if installed)
 type mcfly &>/dev/null && eval "$(mcfly init zsh)"
