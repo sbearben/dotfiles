@@ -73,7 +73,7 @@ function e64() {
   if [ $# -eq 0 ]; then
 		echo "b64e requires an argument for the string to encode" && return 1
 	fi
-  echo "$1" | base64
+  echo -n "$1" | base64
 }
 
 # Decode the provided base64 encoded string
@@ -81,7 +81,7 @@ function d64() {
   if [ $# -eq 0 ]; then
 		echo "b64d requires an argument for the string to decode" && return 1
 	fi
-  echo "$1" | base64 -d ; echo
+  echo -n "$1" | base64 -d ; echo
 }
 
 
@@ -123,4 +123,19 @@ function adb_record() {
 function adb_remove_user_app() {
   local package_name=$1
   adb shell pm uninstall --user 0 "$package_name"
+}
+
+
+##################################################
+# Process/ports/other                            #
+##################################################
+
+function find_process_on_port() {
+  local port=$1
+  lsof -i tcp:"$port"
+}
+
+function kill_process() {
+  local pid=$1
+  kill -9 "$pid"
 }
