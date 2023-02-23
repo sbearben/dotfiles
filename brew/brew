@@ -60,6 +60,7 @@ function run_brew() {
       'node'
       'open-completion'
       "$OPEN_JDK_11"
+      "ripgrep"
       # Install different versions of ruby
       'ruby-install'
       'scrcpy'
