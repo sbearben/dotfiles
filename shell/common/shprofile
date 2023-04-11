@@ -40,8 +40,8 @@ if type /usr/libexec/java_home >/dev/null; then
 fi
 
 if type mcfly >/dev/null; then
-  export MCFLY_RESULTS=20
-  export MCFLY_HISTORY_LIMIT=10000
+  export MCFLY_RESULTS=30
+  export MCFLY_HISTORY_LIMIT=15000
   if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" != "Dark" ]; then
     export MCFLY_LIGHT=TRUE
   fi
