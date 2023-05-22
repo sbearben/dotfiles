@@ -13,9 +13,7 @@ function install_vscode_extensions() {
     k--kato.intellij-idea-keybindings
     mohsen1.prettify-json
     ms-vscode.cpptools
-    ms-vscode.vscode-typescript-tslint-plugin
     naumovs.color-highlight
-    rbbit.typescript-hero
     streetsidesoftware.code-spell-checker
     timonwong.shellcheck
     Tyriar.lorem-ipsum
