@@ -43,6 +43,8 @@
 [core]
 	commitGraph = true
 	pager = delta --syntax-theme \"$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo "Visual Studio Dark+" || echo "GitHub")\"
+	fsmonitor = true
+	untrackedCache = true
 
 [diff]
 	algorithm = patience
