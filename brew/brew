@@ -42,6 +42,8 @@ function run_brew() {
       'cheatsheet'
       # Ruby environment tool
       'chruby'
+      # GNU diff
+      'diffutils'
       'docker-completion'
       'dockutil'
       'fzf'
