@@ -21,6 +21,8 @@
   },
   "editor.formatOnSave": true,
   "editor.rulers": [80],
+  // Used by copilot I believe
+  "editor.inlineSuggest.enabled": true,
 
   "files.insertFinalNewline": true,
 

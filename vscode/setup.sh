@@ -8,6 +8,7 @@ function install_vscode_extensions() {
     donjayamanne.githistory
     eamodio.gitlens
     esbenp.prettier-vscode
+    github.copilot
     golang.go
     Gruntfuggly.todo-tree
     k--kato.intellij-idea-keybindings
