@@ -4,6 +4,7 @@
 
 function install_applications() {
   local -a apps=(
+    '1password'
     'android-studio'
     'flipper'
     'flux'

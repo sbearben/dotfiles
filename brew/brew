@@ -34,6 +34,7 @@ function run_brew() {
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
+      '1password-cli'
       'ack'
       'apktool'
       'bash-completion@2'
