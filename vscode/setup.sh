@@ -22,6 +22,9 @@ function install_vscode_extensions() {
     rebornix.ruby
     wingrunr21.vscode-ruby
     castwide.solargraph
+    # Vim
+    # vscodevim.vim
+    # andenetalexander.vim-cheatsheet
   )
   local installed_extensions
   installed_extensions=$(code --list-extensions)
