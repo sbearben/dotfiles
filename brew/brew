@@ -66,6 +66,7 @@ function run_brew() {
       "ripgrep"
       # Install different versions of ruby
       'ruby-install'
+      'scc'
       'scrcpy'
       'shellcheck'
       # https://jonas.github.io/tig/ 
