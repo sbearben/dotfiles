@@ -29,6 +29,8 @@ setopt prompt_subst
 setopt bash_auto_list
 setopt complete_aliases
 # unsetopt ALWAYS_LAST_PROMP
+# Turn off autocomplete beeps
+unsetopt LIST_BEEP
 
 # case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
