@@ -26,7 +26,7 @@
 	ra = "rebase --abort"
 	# Actions
 	# Pull, rebase on a defined branch
-	prb = "!f() { git checkout "$1" && git pull && git checkout - && git rebase "$1"; }; f"
+	prb = "!f() { git pull --rebase origin "$1"; }; f"
 	open-gh = "!f() { \
 		open \"$(git ls-remote --get-url $(git config --get branch.$(git branch --show-current).remote) \
     | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
