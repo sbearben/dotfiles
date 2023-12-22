@@ -30,14 +30,6 @@
     "*.html.erb": "html"
   },
 
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html"
-  ],
-
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
@@ -59,7 +51,7 @@
     "editor.tabSize": 2
   },
 
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 3, TabWidth: 3, UseTab: Never, IndentAccessModifiers: true, ColumnLimit: 100, BreakBeforeTernaryOperators: true, ReflowComments: false }",
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 3, TabWidth: 3, UseTab: Never, IndentAccessModifiers: true, ColumnLimit: 100, BreakBeforeTernaryOperators: true, ReflowComments: false, PointerAlignment: Left, DerivePointerAlignment: false, ReferenceAlignment: Right }",
   "C_Cpp.default.cppStandard": "c++11",
   "clang-format.style": "file",
 
