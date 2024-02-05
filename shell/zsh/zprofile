@@ -74,6 +74,9 @@ fi
 # enable mcfly (if installed)
 type mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
+# rust
+source "$HOME/.cargo/env"
+
 # Init zsh dotfile extensions
 [[ -r "$EXT_ZPROFILE" ]] && source "$EXT_ZPROFILE";
 source "$DOTFILES_DIRECTORY/shell/common/sh_ext_init"

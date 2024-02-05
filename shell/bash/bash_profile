@@ -39,6 +39,10 @@ fi
 # enable mcfly (if installed)
 type mcfly &>/dev/null && eval "$(mcfly init bash)"
 
+# rust
+source "$HOME/.cargo/env"
+
 # Init bash dotfile extensions
 [[ -r "$EXT_BASH_PROFILE" ]] && source "$EXT_BASH_PROFILE";
 source "$DOTFILES_DIRECTORY"/shell/common/sh_ext_init
+
