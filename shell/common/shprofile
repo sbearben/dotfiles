@@ -32,6 +32,8 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 # Add dotfiles bin to path
 export PATH="${PATH}:${DOTFILES_DIRECTORY}/bin"
+# psql use vim with sql formatting for edit mode
+export PSQL_EDITOR='vim -c "set ft=sql"'
 
 # Jdk path - currently v.11
 if type /usr/libexec/java_home >/dev/null; then
