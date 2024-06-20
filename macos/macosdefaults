@@ -146,6 +146,8 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 defaults write com.apple.TextEdit RichText -int 0
 # Open blank document by default instead of showing file browser
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+# Set tab width to 4 spaces
+defaults write com.apple.TextEdit "TabWidth" '4'
 
 # Open and save files as UTF-8 in TextEdit
 # defaults write com.apple.TextEdit PlainTextEncoding -int 4
