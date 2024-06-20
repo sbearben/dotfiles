@@ -31,7 +31,7 @@
   },
 
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "[typescript]": {
@@ -51,6 +51,10 @@
     "editor.tabSize": 2
   },
 
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 3, TabWidth: 3, UseTab: Never, IndentAccessModifiers: true, ColumnLimit: 100, BreakBeforeTernaryOperators: true, ReflowComments: false, PointerAlignment: Left, DerivePointerAlignment: false, ReferenceAlignment: Right }",
   "C_Cpp.default.cppStandard": "c++11",
   "clang-format.style": "file",
@@ -62,5 +66,6 @@
   "cSpell.enabledLanguageIds": ["markdown"],
   "cSpell.enabled": true,
   // Display spell checker status on the status bar.
-  "cSpell.showStatus": false
+  "cSpell.showStatus": false,
+  "cmake.showOptionsMovedNotification": false
 }
